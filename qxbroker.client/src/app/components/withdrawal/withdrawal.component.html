@@ -1,0 +1,170 @@
+<div class="container">
+    <div class="content">
+        <div class="header">
+            <app-navigation-links></app-navigation-links>
+            <app-balance-values></app-balance-values>
+        </div>
+        <div class="page-sections">
+            <div class="page-sections-row">
+                <div class="page-sections-column">
+                    <div class="page-sections-row">
+                        <div class="content-section grow-1of3">
+                            <div class="content-section-head">Account:</div>
+                            <dl class="balance-list">
+                                <dt class="balance-list-label">In the account:</dt>
+                                <dd class="balance-list-value">{{ (user$ | async)?.totalBalance + ' $' }}</dd>
+                                <dt class="balance-list-label">Available for withdrawal:</dt>
+                                <dd class="balance-list-value">0.00 $</dd>
+                                <dt class="balance-list-label">Commission:</dt>
+                                <dd class="balance-list-value">0.00 $</dd>
+                            </dl>
+                        </div>
+                        <div class="content-section grow-2of3">
+                            <div class="content-section-head">Withdrawal:</div>
+                            <div *ngIf="transactionsLength <= 0; else goToVerification">
+                                <div class="alert alert-danger">
+                                    <div class="alert-icon">
+                                        <span class="icon-alert"></span>
+                                    </div>
+                                    <div class="alert-message">
+                                        <p>You can withdraw money from your balance electronic
+                                            purse. You can request withdrawal any time. Your withdrawal requests are
+                                            processed in 3 business days
+                                        </p>
+                                        <a [routerLink]="['/deposit']">Make a deposit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-template #goToVerification>
+                                <button *ngIf="(user$ | async)?.verification?.status === VerificationStatus.Unverified; else onVerification" class="btn btn-green btn-verification" (click)="showUserVerificationDialog()">
+                                    Go to verification
+                                </button>
+                            </ng-template>
+                            <ng-template #onVerification>
+                                <div class="alert success" *ngIf="(user$ | async)?.verification?.status === VerificationStatus.OnVerification; else checkDecline">
+                                    <div class="alert-icon">
+                                        <span class="icon-alert"></span>
+                                    </div>
+                                    <div class="alert-message">
+                                        <p>                                    Your application has been received for 
+                                            Your application has been received for review. The process will take up to 3 business days. Thank you for your patience!
+                                        </p>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template #checkDecline>
+                                <div *ngIf="(user$ | async)?.verification?.status === VerificationStatus.Rejected; else checkUserStatus">
+                                    <div class="form-warning">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<circle cx="10" cy="10" r="10" fill="#FF8A00"></circle>
+											<path d="M10 15.8327C9.31092 15.8327 8.75 15.3092 8.75 14.666C8.75 14.0229 9.31092 13.4994 10 13.4994C10.6891 13.4994 11.25 14.0229 11.25 14.666C11.25 15.3092 10.6891 15.8327 10 15.8327ZM11.25 11.166C11.25 11.8092 10.6891 12.3327 10 12.3327C9.31092 12.3327 8.75 11.8092 8.75 11.166V5.33268C8.75 4.68954 9.31092 4.16602 10 4.16602C10.6891 4.16602 11.25 4.68954 11.25 5.33268V11.166Z" fill="white"></path>
+										</svg>
+										<span>
+											Unfortunately, your application has been declined. This may be due to incorrect information or an unreadable photo. Please review your details and try again.
+										</span>
+                                    </div>
+                                    <button class="btn btn-green btn-verification" (click)="showUserVerificationDialog()">
+                                        Go to verification
+                                    </button>
+                                </div>          
+                            </ng-template>
+                            <ng-template #checkUserStatus>
+                                <div *ngIf="(user$ | async)?.verification?.status === VerificationStatus.Verification && (user$ | async)?.vipStatus === VipStatus.Start; else withdraw">
+                                    <div class="alert alert-danger">
+                                        <div class="alert-icon">
+                                            <span class="icon-alert"></span>
+                                        </div>
+                                        <div class="alert-message">
+                                            <p>Please obtain the Standard status to withdraw funds from your balance.
+                                            </p>
+                                            <a (click)="openUserStatusDialog()">Get Standart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template #withdraw>
+                                <div class="withdraw">
+                                    <div class="alert alert-danger">
+                                        <div class="alert-icon">
+                                            <span class="icon-alert"></span>
+                                        </div>
+                                        <div class="alert-message">
+                                            <span [style.display]="'block'">The withdrawal will be processed to your wallet <b>{{ (user$ | async)?.verification?.walletAddress }}</b></span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-control">
+                                            <label class="input-control-cabinet input-control-cabinet-text" for="amount">
+                                                <span class="input-control-cabinet-label">The amount</span>
+                                                <input	class="input-control-cabinet-input" 
+                                                        type="number" 
+                                                        name="amount" 
+                                                        [(ngModel)]="amount"
+                                                />
+                                                <div class="input-control-cabinet-addon">USD</div>
+                                            </label>
+                                        </div>
+                                        <div class="form-tiny">
+                                            <a class="button button-tiny" (click)="setAmount(150)" href="javascript:void(0)">{{ 150 | currency }}</a>
+                                            <a class="button button-tiny" (click)="setAmount(200)" href="javascript:void(0)">{{ 200 | currency }}</a>
+                                            <a class="button button-tiny" (click)="setAmount(300)" href="javascript:void(0)">{{ 300 | currency }}</a>
+                                            <a class="button button-tiny" (click)="setAmount(500)" href="javascript:void(0)">{{ 500 | currency }}</a>
+                                            <a class="button button-tiny" (click)="setAmount(1000)" href="javascript:void(0)">{{ 1000 | currency }}</a>
+                                        </div>
+                                    </div>
+                                    <!-- Use WithdrawalSendDialogService when method on withdraw will exist -->
+                                    <button class="btn btn-green btn-verification">
+                                        Send request
+                                    </button>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="page-sections-row">
+                        <div class="content-section grow-full">
+                            <div class="content-section-head">
+                                <span>Some of your latest requests:</span>
+                                <a class="content-section-head-action link" [routerLink]="['/transactions']">
+                                    <span class="hide-sm">All financial history</span>
+                                    <img class="icon icon-primary" src="assets/images/icomoon-fails/caret-right.svg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-sections-column">
+                    <div class="page-sections-row">
+                        <div class="content-section">
+                            <div class="content-section-head">
+                                <span>FAQ:</span>
+                                <a class="content-section-head-action link" [routerLink]="['/faq']">
+                                    <span>Check out full FAQ</span>
+                                    <img class="icon icon-primary" src="assets/images/icomoon-fails/caret-right.svg">
+                                </a>	
+                            </div>
+                            <div class="faq faq-columns">
+                                <div class="faq-column">
+                                    <div class="faq-item" *ngFor="let item of faq.slice(0, 5)">
+                                        <div class="faq-question" [ngClass]="item.toggled ? 'active' : ''" (click)="item.toggled = !item.toggled">
+                                            {{ item.question }}
+                                        </div>
+                                        <div class="faq-answer" [innerHTML]="item.answer"></div>
+                                    </div>
+                                </div>
+                                <div class="faq-column">
+                                    <div class="faq-item" *ngFor="let item of faq.slice(5, 9)">
+                                        <div class="faq-question" [ngClass]="item.toggled ? 'active' : ''" (click)="item.toggled = !item.toggled">
+                                            {{ item.question }}
+                                        </div>
+                                        <div class="faq-answer" [innerHTML]="item.answer"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-brands-footer></app-brands-footer>
+    </div>
+</div>

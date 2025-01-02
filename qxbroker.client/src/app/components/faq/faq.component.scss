@@ -1,0 +1,77 @@
+@import "../../../styles/variables";
+@import "../../../styles/questions";
+.questions {
+    max-width: 1392px;
+    width: 100%;
+    margin: 120px auto;
+    color: $color-white;
+
+    @media (max-width: 1392px) {
+        padding: 0 24px;
+    }
+
+    @media (max-width: 680px) {
+        padding: 0 12px;
+        margin: 48px auto;
+    }
+
+    .questions {
+        font-size: 48px;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 24px;
+
+        @media (max-width: 680px) {
+            font-size: 24px;
+        }
+    }
+
+    .questions-subtitle {
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        grid-column-gap: 12px;
+        align-items: center;
+        margin-bottom: 24px;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 30px;
+
+        @media (max-width: 680px) {
+            font-size: 16px;
+            line-height: 20px;
+        }
+
+        .questions-svg {
+            display: block;
+            width: 30px;
+            height: 30px;
+            grid: none;
+            content: '';
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .general-questions {
+            background-image: url("../../../assets/images/faq-general-questions.svg");
+        }
+        .financial-questions {
+            background-image: url("../../../assets/images/faq-financial-questions.svg");
+        }
+        .registration-questions {
+            background-image: url("../../../assets/images/faq-registration-questions.svg");
+        }
+    }
+
+    .questions-help {
+        color: $color-grey;
+        font-size: 21px;
+        font-weight: 400;
+        line-height: 34px;
+
+        @media (max-width: 680px) {
+            font-size: 16px;
+            line-height: 26px;
+        }
+    }
+
+}

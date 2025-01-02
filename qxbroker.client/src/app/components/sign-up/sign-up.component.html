@@ -1,0 +1,124 @@
+<div class="sign-form">
+	<div class="sign-form-container">
+		<div class="form-title">Sign Up</div>
+
+		<div class="form-area">
+			<div class="area-tabs">
+				<div class="tabs">
+					<a href="/sign-in/" class="tab" [routerLink]="['/sign-in']">Log In</a>
+					<a href="/sign-up/" class="tab active">Sign Up</a>
+				</div>
+			</div>
+
+			<form [formGroup]="formGroup">
+				<div class="form-input sign-input select">
+					<label class="input-label">Country / Region of residence</label>
+					<ng-select  class="input input-value focus-tooltip"
+									[clearable]="false"
+									[items]="countryItems"
+									[searchable]="false"
+									bindLabel="name"
+									bindValue="name"
+									formControlName="country">
+					</ng-select>
+					<p *ngIf="country?.hasError('required') && (country?.touched || country?.dirty)" class="error-text">The Country must be required</p>
+				</div>
+
+				<div class="form-input sign-input select">
+					<label class="input-label">Currency</label>
+					<ng-select  class="input input-value focus-tooltip"
+									[clearable]="false"
+									[items]="currency"
+									[searchable]="false"
+									bindLabel="name"
+									bindValue="name"
+									formControlName="currency">
+					</ng-select>
+				</div>
+
+				<div class="form-input">
+					<label class="input-label">Email</label>
+					<input
+						type="email"
+						class="input input-value focus-tooltip"
+						required
+						formControlName="email"
+					/>
+					<div class="input-tooltip">
+						It is not possible to change the email address in the future. If you specify a non-existent or incorrect email address, it will not be possible to withdraw funds from your account.
+					</div>
+				</div>
+
+				<div class="form-input">
+					<label class="input-label">Password</label>
+					<input [type]="showPassword ? 'text' : 'password'" class="input input-value password" formControlName="password" required/>
+					<div class="btn-password" *ngIf="password?.value">
+						<span *ngIf="!showPassword" class="icon-show-password" (click)="showPassword = true"></span>
+						<span *ngIf="showPassword"class="icon-hide-password" (click)="showPassword = false"></span>
+					</div>
+					<p *ngIf="password?.hasError('maxlength')" class="error-text">The Password field must be at least 8 characters in length</p>
+				</div>
+
+				<div class="checked-mark-area">
+					<div class="checkmark-container">
+						<label class="checkmark-label">
+							<input class="input-checked" type="checkbox" formControlName="over18"/>
+							<span class="checkmark"></span>
+							<div> I confirm that I am over 18 years of age and accept
+								<a href="../../../assets/files/Service_Agreement_QTX.pdf" class="forgot" target="_blank">User Agreement</a>
+							</div>
+						</label>
+					</div>
+					<p *ngIf="over18?.invalid && (over18?.touched || over18?.dirty)" class="error-text">The Agreement field is required</p>
+				</div>
+
+				<div class="checked-mark-area">
+					<div class="checkmark-container">
+						<label class="checkmark-label">
+							<input class="input-checked" type="checkbox" formControlName="notUSResident"/>
+							<span class="checkmark"></span>
+							<div>I represent and warrant that I am not a citizen or resident of the United States for tax purposes.</div>
+						</label>
+					</div>
+					<p *ngIf="notUSResident?.invalid && (notUSResident?.touched || notUSResident?.dirty)" class="error-text">The Not US Resident field is required</p>
+				</div>
+
+				<button class="btn form-button" (click)="onSubmit()">
+					<div>Sign Up</div>
+					<span class="icon-button"></span>
+				</button>
+				<span class="error-text">{{ this.errorSignUpMessage }}</span>
+			</form>
+
+				<div class="form-footer">
+					<div class="header">
+						<div class="text">Sign in with</div>
+					</div>
+
+					<div class="form-social">
+						<a class="social-button facebook">
+							<i class="icon icon-facebook-login"></i>
+						</a>
+						<a class="social-button google">
+							<i class="icon icon-google"></i>
+						</a>
+					</div>
+				</div>
+			<div id="tab-1" class="tabs-item">
+				<form
+					action="/sign-in/"
+					method="post"
+					onsubmit="return QXvId.submit(this);"
+					dir="auto"
+				>
+					<input
+						type="hidden"
+						name="_token"
+						value="QffK70OFDt5UShvljJOETGOyaXyaklaADBrdUNZx"
+					/>
+				</form>
+			</div>
+			<div class="popup-modal-footer"></div>
+		</div>
+	</div>
+</div>

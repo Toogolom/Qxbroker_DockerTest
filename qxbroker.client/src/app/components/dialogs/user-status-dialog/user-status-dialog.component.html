@@ -1,0 +1,75 @@
+<div class="modal center" [class.active]="dialogService.dialogVisible$ | async">
+	<div class="container modal-user-status">
+		<div class="dialog" appClickOutside (clickOutside)="closeDialog()">
+			<button class="close" type="button" title="Close">
+				<span class="icon-close" (click)="closeDialog()"></span>
+			</button>
+			<div class="p-10">
+				<div class="header">
+					<span class="title">Available levels</span>
+				</div>
+				<div class="body">
+					<div class="status-list">	
+						<div	class="item"
+								*ngFor="let status of vipStatuses"
+								[ngClass]="status.key === (user$ | async)?.vipStatus ? (status.key | lowercase) + ' ' + 'active' : (status.key | lowercase)">
+							<div class="item-content">
+								<div class="status">
+									<ng-container *ngIf="!(user$ | async)?.urlProfileImage">
+										<img class="avatar" [src]="'/assets/images/user-statuses/UserPhoto.png'">
+									</ng-container>
+									<ng-container *ngIf="(user$ | async)?.urlProfileImage">
+										<img class="avatar-custom" [src]="formattedUserPhotoURL((user$ | async)?.urlProfileImage ?? '')">
+									</ng-container>
+
+									<ng-container *ngIf="status.key === VipStatus.Standart">
+										<img class="avatar-border" [src]="'/assets/images/user-statuses/Standart.png'">
+									</ng-container>
+									<ng-container *ngIf="status.key === VipStatus.Premium">
+										<img class="avatar-border" [src]="'/assets/images/user-statuses/Premium.png'">
+									</ng-container>
+									<ng-container *ngIf="status.key === VipStatus.Vip">
+										<img class="avatar-border" [src]="'/assets/images/user-statuses/Vip.png'">
+										<img class="avatar-border crown" [src]="'/assets/images/user-statuses/Crown(vip).png'">
+									</ng-container>
+									<div class="value">
+										{{ (user$ | async)?.vipStatus === status.key ? 'Active' : 'Inactive' }}
+									</div>
+								</div>
+								<div class="description">
+									<div class="title">
+										<div class="flex">
+											<span>{{ status.name }}</span>
+											<div class="balance">{{ 'Deposit from ' + (status.depositBalanceFrom | currency) + ' to ' +  (status.depositBalanceTo | currency) }}</div>
+										</div>		
+										<ng-container *ngIf="status.key === VipStatus.Standart">
+											<img class="circle standart" [src]="'/assets/images/user-statuses/standart-circle.png'">
+										</ng-container>
+										<ng-container *ngIf="status.key === VipStatus.Premium">
+											<img class="circle premium" [src]="'/assets/images/user-statuses/premium-circle.png'">
+										</ng-container>
+										<ng-container *ngIf="status.key === VipStatus.Vip">
+											<img class="circle vip" [src]="'/assets/images/user-statuses/vip-circle.png'">
+										</ng-container>
+									</div>
+									<div class="advantage" *ngFor="let advantage of status.advantages">
+										<div class="label">{{ advantage.label }}</div>
+										<div class="value">{{ advantage.description }}</div>
+									</div>
+								</div>
+							</div>
+							<a	*ngIf="isHigherPriority(status, (user$ | async)?.vipStatus)"
+								class="btn" (click)="goToDeposit()">
+								Upgrade to {{ status.name }}
+							</a>
+							<a	*ngIf="(user$ | async)?.vipStatus === status.key"
+								class="btn current">
+								Your level
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

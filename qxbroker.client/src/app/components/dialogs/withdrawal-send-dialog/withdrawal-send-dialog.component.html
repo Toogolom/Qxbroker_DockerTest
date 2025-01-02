@@ -1,0 +1,28 @@
+<div class="modal center" [class.active]="dialogService.dialogVisible$ | async">
+	<div class="container modal-withdrawal-send">
+		<div class="dialog"  appClickOutside (clickOutside)="closeDialog()">
+			<button class="close" type="button" title="Close">
+				<span class="icon-close" (click)="closeDialog()"></span>
+			</button>
+			<div class="p-10">
+				<div class="header">
+					<span class="title">Withdrawal request accepted</span>
+				</div>
+			</div>
+			<div class="body">
+				<div class="alert success">
+					<div class="alert-icon">
+						<span class="icon-alert"></span>
+					</div>
+					<div class="alert-message">
+						<p>Your withdrawal request has been sent for review</p>
+					</div>
+				</div>
+				<div class="links">
+					<button class="button button-primary button-ok" (click)="goToTransactions()">Go to transactions</button>
+					<button class="button button-primary button-ok" (click)="closeDialog()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

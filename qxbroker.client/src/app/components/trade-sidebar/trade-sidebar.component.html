@@ -1,0 +1,107 @@
+<div class="trade-section">
+    <app-deal-form></app-deal-form>
+</div>
+<div class="deal-list" [ngClass]="dealListToggled ? 'active' : ''">
+    <div class="tabs">
+        <div    class="tab"
+                [ngClass]="dealListType === 'trades' ? 'active' : ''"
+                (click)="switchDealListType('trades')">
+            <span *ngIf="dealListType === 'trades'">Trades</span>
+            <span class="icon-deal-list-trades" *ngIf="dealListType != 'trades'"></span>
+            <div class="count">{{ trades.length }}</div> <!--Tyt vrode activnie sdelki schitat' nado-->
+        </div>
+        <!-- <div    class="tab"
+                [ngClass]="dealListType === 'orders' ? 'active' : ''"
+                (click)="switchDealListType('orders')">
+            <span *ngIf="dealListType === 'orders'">Orders</span>
+            <span class="icon-deal-list-orders" *ngIf="dealListType != 'orders'"></span>
+            <div class="count">0</div>
+        </div> -->
+    </div>
+    <div class="items" [ngClass]="dealListToggled ? 'active' : ''">
+        <ng-container *ngIf="dealListType === 'trades'">
+            <div class="placeholder" *ngIf="trades?.length === 0" @usermenuFadeIn>
+                <div class="empty">
+                    <span class="icon-trades-empty"></span>
+                    <p>You don't have a trade history yet. You can open a trade using the form above.</p>
+                </div>
+            </div>
+            <ng-container  *ngFor="let date of groupedBets | keyvalue: sortDatesDesc">
+                <div class="date">
+                    {{ date.key }}
+                    <span>{{ date.value.count }}</span>
+                </div>
+                <div class="trade-item close" *ngFor="let item of date.value.bets" [ngClass]="item.isDetailsVisible? 'active' : ''">
+                    <div class="title" (click)="toggleDetails(item)">
+                        <span class="icon-caret"></span>
+                        <div class="flags">
+                            <span class="icon-flag-btc"></span>
+                            <span class="icon-flag-btc"></span>
+                        </div>
+                        <div class="name">{{ item.pair }}</div>
+                        <div class="countdown" *ngIf="item.status === BetStatus.InProceed">{{ convertDurationToHHMMSS(getRemainingTime(item)) }}</div>
+                        <div class="countdown" *ngIf="item.status !== BetStatus.InProceed">{{ convertDurationToHHMMSS(item.duration) }}</div>
+                        <div class="delta" [ngClass]="item.betType === 'Up' ? 'up' : 'down'">
+                            <!--icon-->
+                            <span>{{ item.amount | currency }}</span>
+                            <div class="right" [ngClass]="item.income > 0 ? 'up' : 'down'">{{ item.income | currency }}</div>
+                        </div>
+                    </div>
+                    <ul class="details close">
+                        <li class="content">
+                            <div class="title">ID:</div>
+                            <div class="text">{{ item.id }}</div>
+                        </li>
+                        <li class="content">
+                            <div class="title">Trade pair:</div>
+                            <div class="text">
+                                {{ item.pair }}
+                                <div class="percent">
+                                    {{ item.percent }}%
+                                </div>
+                            </div>
+                        </li>
+                        <li class="content">
+                            <div class="title">Open Price:</div>
+                            <div class="text">{{ item.openPrice | currency }}</div>
+                        </li>
+                        <li class="content">
+                            <div class="title">Close Price:</div>
+                            <div class="text">{{ item.closePrice | currency }}</div>
+                        </li>
+                        <li class="content">
+                            <div class="title">Open time:</div>
+                            <div class="text">{{ item.openTime | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
+                        </li>
+                        <li class="content">
+                            <div class="title">Close time:</div>
+                            <div class="text">{{ item.closeTime | date: 'yyyy-MM-dd HH:mm:ss' }}</div>
+                        </li>
+                        <li class="content">
+                            <div class="title">Duration:</div>
+                            <div class="text">{{ item.duration }}</div>
+                        </li>
+                        <li class="content">
+                            <div class="title">Difference:</div>
+                            <div class="text">{{ item.openPrice - item.closePrice }}</div>
+                        </li>
+                    </ul>
+                </div>
+            </ng-container>
+
+        </ng-container>
+
+        <!-- <ng-container *ngIf="dealListType === 'orders'">
+            <div class="placeholder" *ngIf="orders.length === 0" @usermenuFadeIn>
+                <div class="empty">
+                    <span class="icon-trades-empty"></span>
+                    <p>Order list is empty.<br>Create a pending trade using the form above.</p>
+                </div>
+            </div>
+        </ng-container> -->
+    </div>
+    <div class="toggle" [ngClass]="dealListToggled ? 'active' : ''" (click)="toggleDealList()">
+        <span class="icon-arrow-triangle-small-up"></span>
+    </div>
+</div>
+

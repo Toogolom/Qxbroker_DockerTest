@@ -1,0 +1,32 @@
+<div class="container">
+	<span class="btn btn-green btn-back" routerLink="/education">← Back</span>
+	<div class="body">
+		<div class="title">{{ section.title }}</div>
+		<div class="description" [innerHTML]="section.description">
+		</div>
+		<div class="box">
+			<div class="topics">
+				<div class="topic" *ngFor="let topic of section.topics">
+					<button class="button">
+						<div class="title">{{ topic.title }}</div>
+						<div class="subtopics-count">{{ topic.subtopics.length + ' ' + 'Themes' }}</div>
+					</button>
+					<div class="subtopics" *ngFor="let subtopic of topic.subtopics">
+						<div class="subtopic" [ngClass]="currentSubTopic.id === subtopic.id && currentTopic.id === topic.id ? 'active' : ''">
+							<svg xmlns="http://www.w3.org/2000/svg" width="1.28em" height="1em" viewBox="0 0 1792 1408"><path fill="currentColor" d="M1792 1216v128q0 26-19 45t-45 19H64q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1664q26 0 45 19t19 45m-384-384v128q0 26-19 45t-45 19H64q-26 0-45-19T0 960V832q0-26 19-45t45-19h1280q26 0 45 19t19 45m256-384v128q0 26-19 45t-45 19H64q-26 0-45-19T0 576V448q0-26 19-45t45-19h1536q26 0 45 19t19 45M1280 64v128q0 26-19 45t-45 19H64q-26 0-45-19T0 192V64q0-26 19-45T64 0h1152q26 0 45 19t19 45"/></svg>
+							<a 	class="title" 
+								[ngClass]="currentSubTopic.id === subtopic.id ? 'active' : ''"
+								(click)="changeSubTopic(topic.id, subtopic.id)">
+								{{ subtopic.title }}
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="title">{{ currentSubTopic.title }}</div>
+				<div class="body" [innerHTML]="currentSubTopic.content"></div>
+			</div>
+		</div>
+	</div>
+</div>

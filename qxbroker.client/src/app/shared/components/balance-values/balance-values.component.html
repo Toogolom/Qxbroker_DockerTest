@@ -1,0 +1,18 @@
+<div class="balance-values">
+	<div class="balance balance-margin" *ngIf="showCurrentCurrency">
+		<div class="label">Current currency</div>
+		<div class="currency">
+			<span class="balance-currency-icon">$</span>
+			<b>{{ currentCurrency$ | async }}</b>
+			<!-- <div class="balance-button">Swap</div> -->
+		</div>
+	</div>
+	<div class="balance" *ngIf="showWithdrawalValue">
+		<div class="label">Available for withdrawal</div>
+		<div class="value">{{ 0.00 | currency }}</div>
+	</div>
+	<div class="balance" *ngIf="showTotalBalance">
+		<div class="label">In the account</div>
+		<div class="value">{{ (user$ | async)?.totalBalance | currency }}</div>
+	</div>
+</div>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" Sdk="Microsoft.Docker.Sdk">
+  <PropertyGroup Label="Globals">
+    <ProjectVersion>2.1</ProjectVersion>
+    <DockerTargetOS>Linux</DockerTargetOS>
+    <DockerPublishLocally>False</DockerPublishLocally>
+    <ProjectGuid>c4cc805a-1591-42d0-93d4-d9b9c8219639</ProjectGuid>
+    <DockerLaunchAction>DoNotLaunch</DockerLaunchAction> <!-- Отключаем открытие браузера по умолчанию -->
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/</DockerServiceUrl> <!-- Не указываем swagger -->
+    <DockerServiceName>qxbroker.api</DockerServiceName>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="docker-compose.override.yml">
+      <DependentUpon>docker-compose.yml</DependentUpon>
+    </None>
+    <None Include="docker-compose.yml" />
+    <None Include=".dockerignore" />
+  </ItemGroup>
+</Project>

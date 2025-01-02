@@ -1,0 +1,48 @@
+<div class="modal center" [class.active]="dialogService.dialogVisible$ | async">
+    <div class="container modal-account-type-changed">
+        <div class="dialog" appClickOutside (clickOutside)="closeDialog()">
+            <button class="close" type="button" title="Close">
+                <span class="icon-close" (click)="closeDialog()"></span>
+            </button>
+            <div class="p-10">
+                <div class="header">
+                    <span class="title">Account type changed</span>
+                </div>
+                <div class="body">
+                    <span class="description">
+                        {{ 'You are now trading on a ' + getAccountTypeName(dialogData?.currentAccountType ?? AccountType.Demo) }}
+                    </span>
+                    <div class="change">
+                        <ng-container *ngTemplateOutlet="accountTemplate; context: { 
+                                accountType: dialogData?.previousAccountType, 
+                                balance: dialogData?.previousBalance, 
+                                beforeChange: true 
+                            }">
+                        </ng-container>
+                        <span class="icon-arrow-right"></span>
+                        <ng-container *ngTemplateOutlet="accountTemplate; context: { 
+                                accountType: dialogData?.currentAccountType, 
+                                balance: dialogData?.currentBalance, 
+                                beforeChange: false 
+                            }">
+                        </ng-container>
+                    </div>
+                    <button class="btn-change" type="button" title="Close" (click)="closeDialog()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template    #accountTemplate 
+                let-accountType="accountType" 
+                let-balance="balance" 
+                let-beforeChange="beforeChange">
+    <div class="type" [ngClass]="{'type-before': beforeChange, 'type-after': !beforeChange}">
+        <div class="type-icon">
+            <span [ngClass]="getIconClass(accountType)"></span>
+        </div>
+        <span class="type-account">{{ getAccountTypeName(accountType) }}</span>
+        <span class="type-balance">{{ balance | currency }}</span>
+    </div>
+</ng-template>

@@ -1,0 +1,25 @@
+﻿
+<ng-container *ngIf="isAuth; else guest">
+    <div class="app">
+        <app-sidebar></app-sidebar>
+        <div class="page">
+            <app-page-header></app-page-header>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #guest>
+    <div class="main-content">
+        <app-header></app-header>
+        <router-outlet></router-outlet>
+        <app-footer></app-footer>
+    </div>
+</ng-template>
+
+<app-account-type-changed-dialog></app-account-type-changed-dialog>
+<app-user-status-dialog></app-user-status-dialog>
+<app-confirm-transaction-dialog></app-confirm-transaction-dialog>
+<app-user-verification-dialog></app-user-verification-dialog>
+<app-transaction-result-dialog></app-transaction-result-dialog>
+<app-withdrawal-send-dialog></app-withdrawal-send-dialog>

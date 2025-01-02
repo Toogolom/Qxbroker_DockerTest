@@ -1,0 +1,62 @@
+<div class="header" [class.is-mobile]="opened">
+    <div class="header-menu">
+        <a class="header-logo" href="/" [routerLink]="['/']">
+            <span class="logo"></span>
+        </a>
+        <nav class="navbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link btn"  [routerLink]="['/sign-up']">
+                        {{ 'HEADER.DEMO' | translate }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn" [routerLink]="['/about-us']">
+                        {{ 'HEADER.ABOUT_US' | translate }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn" [routerLink]="['/faq']">
+                        {{ 'HEADER.FAQ' | translate }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn" [routerLink]="['/education']">
+                        {{ 'HEADER.LEARNING' | translate }}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <a href="/sign-in/" class="login-btn btn" [routerLink]="['/sign-in']">{{ 'HEADER.LOGIN' | translate }}</a>
+            <a href="/sign-up/" class="register-btn btn-green btn" [routerLink]="['/sign-up']">{{ 'HEADER.SIGNUP' | translate }}</a>
+        </div>
+        <button id="mobile-trigger" class="header-mobile-button" (click)="openDropdown()">
+            <div id="nav-icon" class="nav-icon">
+                <span class="icon-span"></span>
+                <span class="icon-span"></span>
+            </div>
+        </button>
+        <div class="mobile-navbar">
+            <div class="mobile-nav">
+                <div class="nav-item">
+                    <a class="item-href" (click)="navigateTo('/sign-up')">Demo account</a>
+                </div>
+                <div class="nav-item">
+                    <a class="item-href" (click)="navigateTo('/about-us')">About us</a>
+                </div>
+                <div class="nav-item">
+                    <a class="item-href" (click)="navigateTo('/faq')">FAQ</a>
+                </div>
+                <div class="nav-item">
+                    <a class="item-href" (click)="navigateTo('/education')">Learning</a>
+                </div>
+            </div>
+
+            <div class="mobile-footer-buttons">
+                <a href="/sign-in/" class="login-btn btn" [routerLink]="['/sign-in']">Log In</a>
+                <a href="/sign-up/" class="btn-green btn" [routerLink]="['/sign-up']">Sign up</a>
+            </div>
+        </div>
+    </div>
+</div>

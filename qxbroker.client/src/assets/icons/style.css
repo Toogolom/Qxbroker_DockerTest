@@ -1,0 +1,373 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?1x57th');
+  src:  url('fonts/icomoon.eot?1x57th#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?1x57th') format('truetype'),
+    url('fonts/icomoon.woff?1x57th') format('woff'),
+    url('fonts/icomoon.svg?1x57th#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-flag-usd .path1:before {
+  content: "\e939";
+  color: rgb(255, 0, 0);
+}
+.icon-flag-usd .path2:before {
+  content: "\e93b";
+  margin-left: -1em;
+  color: rgb(255, 0, 0);
+}
+.icon-flag-usd .path3:before {
+  content: "\e93c";
+  margin-left: -1em;
+  color: rgb(255, 0, 0);
+}
+.icon-flag-usd .path4:before {
+  content: "\e94a";
+  margin-left: -1em;
+  color: rgb(255, 0, 0);
+}
+.icon-flag-usd .path5:before {
+  content: "\e94b";
+  margin-left: -1em;
+  color: rgb(255, 0, 0);
+}
+.icon-flag-usd .path6:before {
+  content: "\e94c";
+  margin-left: -1em;
+  color: rgb(255, 0, 0);
+}
+.icon-flag-usd .path7:before {
+  content: "\e94d";
+  margin-left: -1em;
+  color: rgb(255, 0, 0);
+}
+.icon-flag-usd .path8:before {
+  content: "\e94e";
+  margin-left: -1em;
+  color: rgb(0, 0, 255);
+}
+.icon-flag-usd .path9:before {
+  content: "\e94f";
+  margin-left: -1em;
+  color: rgb(0, 0, 255);
+}
+.icon-flag-usd .path10:before {
+  content: "\e950";
+  margin-left: -1em;
+  color: rgb(0, 0, 255);
+}
+.icon-flag-usd .path11:before {
+  content: "\e951";
+  margin-left: -1em;
+  color: rgb(0, 0, 255);
+}
+.icon-flag-usd .path12:before {
+  content: "\e952";
+  margin-left: -1em;
+  color: rgb(0, 0, 255);
+}
+.icon-flag-usd .path13:before {
+  content: "\e953";
+  margin-left: -1em;
+  color: rgb(0, 0, 255);
+}
+.icon-flag-usd .path14:before {
+  content: "\e954";
+  margin-left: -1em;
+  color: rgb(0, 0, 255);
+}
+.icon-flag-btc:before {
+  content: "\e949";
+  color: #f7931a;
+}
+.icon-calendar:before {
+  content: "\e95a";
+}
+.icon-book:before {
+  content: "\e955";
+}
+.icon-chart-area:before {
+  content: "\e956";
+}
+.icon-globe:before {
+  content: "\e957";
+}
+.icon-chart-bar:before {
+  content: "\e958";
+}
+.icon-clock:before {
+  content: "\e959";
+}
+.icon-caret-right:before {
+  content: "\e927";
+}
+.icon-caret-left:before {
+  content: "\e928";
+}
+.icon-arrow-right-circle:before {
+  content: "\e936";
+}
+.icon-arrow-down-circle:before {
+  content: "\e937";
+}
+.icon-arrow-up-circle:before {
+  content: "\e938";
+}
+.icon-alert1:before {
+  content: "\e948";
+}
+.icon-show-password:before {
+  content: "\e946";
+}
+.icon-hide-password:before {
+  content: "\e947";
+}
+.icon-sort-mark:before {
+  content: "\e944";
+}
+.icon-search:before {
+  content: "\e945";
+}
+.icon-favorite-filled:before {
+  content: "\e942";
+}
+.icon-favorite:before {
+  content: "\e943";
+}
+.icon-trades-empty:before {
+  content: "\e941";
+}
+.icon-arrow-triangle-small-up:before {
+  content: "\e940";
+}
+.icon-deal-list-trades:before {
+  content: "\e93f";
+}
+.icon-deal-list-orders:before {
+  content: "\e93e";
+}
+.icon-check-tiny:before {
+  content: "\e93d";
+}
+.icon-export-trades:before {
+  content: "\e935";
+}
+.icon-graph-trades:before {
+  content: "\e93a";
+}
+.icon-refresh:before {
+  content: "\e934";
+}
+.icon-promo-percent:before {
+  content: "\e930";
+}
+.icon-promo-item:before {
+  content: "\e931";
+}
+.icon-promo-card:before {
+  content: "\e932";
+}
+.icon-promo-bank:before {
+  content: "\e933";
+}
+.icon-info:before {
+  content: "\e92d";
+  color: #026fd3;
+}
+.icon-crypto:before {
+  content: "\e92e";
+}
+.icon-payment-credit-card:before {
+  content: "\e92f";
+}
+.icon-arrow-right:before {
+  content: "\e92b";
+}
+.icon-demo:before {
+  content: "\e92c";
+}
+.icon-close:before {
+  content: "\e929";
+}
+.icon-academic:before {
+  content: "\e92a";
+}
+.icon-logout:before {
+  content: "\e926";
+}
+.icon-pencil:before {
+  content: "\e925";
+}
+.icon-plus:before {
+  content: "\e91f";
+  color: #fff;
+}
+.icon-caret:before {
+  content: "\e920";
+}
+.icon-profile-level-standart:before {
+  content: "\e921";
+  color: #35cb01;
+}
+.icon-alert:before {
+  content: "\e922";
+}
+.icon-not-verified:before {
+  content: "\e923";
+  color: #fff;
+}
+.icon-burger-sidebar:before {
+  content: "\e924";
+}
+.icon-help-sidebar:before {
+  content: "\e91d";
+}
+.icon-profile-sidebar:before {
+  content: "\e91e";
+}
+.icon-trade-sidebar:before {
+  content: "\e91c";
+}
+.icon-appendix-appstore .path1:before {
+  content: "\e900";
+  color: rgb(166, 166, 166);
+  opacity: 0.3;
+}
+.icon-appendix-appstore .path2:before {
+  content: "\e901";
+  margin-left: -2.984375em;
+  color: rgb(0, 0, 0);
+  opacity: 0.3;
+}
+.icon-appendix-appstore .path3:before {
+  content: "\e902";
+  margin-left: -2.984375em;
+  color: rgb(255, 255, 255);
+  opacity: 0.3;
+}
+.icon-appendix-playmarket .path1:before {
+  content: "\e903";
+  color: rgb(0, 0, 0);
+}
+.icon-appendix-playmarket .path2:before {
+  content: "\e904";
+  margin-left: -3.365234375em;
+  color: rgb(166, 166, 166);
+}
+.icon-appendix-playmarket .path3:before {
+  content: "\e905";
+  margin-left: -3.365234375em;
+  color: rgb(255, 255, 255);
+}
+.icon-appendix-playmarket .path4:before {
+  content: "\e906";
+  margin-left: -3.365234375em;
+  color: rgb(234, 67, 53);
+}
+.icon-appendix-playmarket .path5:before {
+  content: "\e907";
+  margin-left: -3.365234375em;
+  color: rgb(251, 188, 4);
+}
+.icon-appendix-playmarket .path6:before {
+  content: "\e908";
+  margin-left: -3.365234375em;
+  color: rgb(66, 133, 244);
+}
+.icon-appendix-playmarket .path7:before {
+  content: "\e909";
+  margin-left: -3.365234375em;
+  color: rgb(52, 168, 83);
+}
+.icon-arrow-dark-down:before {
+  content: "\e90a";
+  color: #fff;
+}
+.icon-chart-candles-type:before {
+  content: "\e90b";
+}
+.icon-facebook-login:before {
+  content: "\e90c";
+  color: #fff;
+}
+.icon-faq-financial-questions:before {
+  content: "\e90d";
+}
+.icon-faq-general-questions:before {
+  content: "\e90e";
+}
+.icon-faq-minus-icon:before {
+  content: "\e90f";
+  color: #026fd3;
+}
+.icon-faq-plus-icon:before {
+  content: "\e910";
+  color: #026fd3;
+}
+.icon-faq-registration-questions:before {
+  content: "\e911";
+  color: #026fd3;
+}
+.icon-form-button .path1:before {
+  content: "\e912";
+  color: rgb(255, 255, 255);
+  opacity: 0.3;
+}
+.icon-form-button .path2:before {
+  content: "\e913";
+  margin-left: -0.9599609375em;
+  color: rgb(255, 255, 255);
+}
+.icon-google .path1:before {
+  content: "\e914";
+  color: rgb(251, 187, 0);
+}
+.icon-google .path2:before {
+  content: "\e915";
+  margin-left: -0.9599609375em;
+  color: rgb(81, 142, 248);
+}
+.icon-google .path3:before {
+  content: "\e916";
+  margin-left: -0.9599609375em;
+  color: rgb(40, 180, 70);
+}
+.icon-google .path4:before {
+  content: "\e917";
+  margin-left: -0.9599609375em;
+  color: rgb(241, 67, 54);
+}
+.icon-icon-pencil1:before {
+  content: "\e918";
+}
+.icon-quotex_logo .path1:before {
+  content: "\e919";
+  color: rgb(255, 255, 255);
+}
+.icon-quotex_logo .path2:before {
+  content: "\e91a";
+  margin-left: -4em;
+  color: rgb(250, 250, 250);
+}
+.icon-quotex_logo-white-mobile:before {
+  content: "\e91b";
+  color: #fff;
+}

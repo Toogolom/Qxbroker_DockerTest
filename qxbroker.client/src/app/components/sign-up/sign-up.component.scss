@@ -1,0 +1,15 @@
+@import "../../../styles/variables";
+@import "../../../styles/forms";
+@import "../../../styles/buttons";
+
+
+.input-value.password {
+	position: relative;
+}
+
+.btn-password {
+	position: absolute;
+	top: 40%;
+	right: 20px;
+	cursor: pointer;
+}

@@ -1,0 +1,39 @@
+@import "../../../../styles/_variables.scss";
+
+.modal-withdrawal-send {
+	max-width: 500px;
+	width: 100% !important;
+}
+
+.header {
+	border-bottom: 1px dashed $color-black-4;
+	display: flex;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+
+	@media only screen and (max-width: 424px) {
+		padding: 10px 10px 24px;
+	}
+
+	.title {
+		color: $color-white;
+		font-size: 20px;
+		font-weight: 700;
+		line-height: 24px;
+	}
+}
+
+.body {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+}
+
+.links {
+	display: flex;
+	column-gap: 10px;
+
+	button {
+		width: 100%;
+	}
+}

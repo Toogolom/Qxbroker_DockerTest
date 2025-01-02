@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="content">
+        <div class="header">
+            <app-navigation-links></app-navigation-links>
+            <app-balance-values></app-balance-values>
+        </div>
+        <div class="page-sections">
+            <div class="deposit-banner" *ngIf="showBonusBanner && fromBonusBanner">
+                <div class="close" (click)="closeBonusBanner()">
+                    <span class="icon-close"></span>
+                </div>
+                <img src="/assets/images/deposit-banner.png" class="bg">
+                <img src="/assets/images/deposit-banner-mobile.png" class="bg-mobile">
+                <div class="container">
+                    <img src="/assets/images/header-bonus-banner-rocket.png" class="icon">
+                    <div>
+                        <div class="title">Special Offer - 30% Deposit BONUS!</div>
+                        <div>
+                            Add $100 or more to your Real account balance and get a 30% bonus. Please complete the Deposit process to receive this bonus.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="info">
+                <span class="icon-info"></span>
+                <span>Some options may not be available at times, due to the maintenance on the side of the financial providers, or other reasons. Please watch for updates, and consider using the other available variants.</span>
+            </div>
+            <div class="page-sections-row">
+                <div class="page-sections-column">
+                    <div class="page-sections-row">
+                        <!-- <div class="content-section grow-1of3">
+                            <div class="content-section-head">
+                                <span class="icon-payment-credit-card"></span>
+                                <div>Bank cards</div>
+                            </div>
+                            <div class="payment-providers">
+                                <ng-container *ngFor="let card of cards">
+                                    <a (click)="navigateToDepositType(card.code)" class="payment-provider">
+                                        <ng-container *ngFor="let icon of card.icons">
+                                            <span [class]="icon"></span>
+                                        </ng-container>
+                                        <span>{{ card.name }}</span>
+                                    </a>
+                                </ng-container>
+                            </div>
+                        </div> -->
+                        <div class="content-section grow-2of3">
+                            <div class="content-section-head">
+                                <span class="icon-crypto"></span>
+                                <div>Cryptocurrencies</div>
+                            </div>
+                            <div class="payment-providers payment-providers-columns">
+                                <ng-container *ngFor="let value of depositVariants">
+                                    <a (click)="navigateToDepositType(value.code)" class="payment-provider">
+                                        <ng-container *ngFor="let icon of value.icons">
+                                            <span [class]="icon"></span>
+                                        </ng-container>
+                                        <span>{{ value.name }}</span>
+                                    </a>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-brands-footer></app-brands-footer>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+@import "../styles/variables";
+
+h1 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 64px;
+    color: $color-white;
+
+    @media (max-width: $media-breakpoint-sm-max) {
+        font-size: 20px;
+        line-height: 24px;
+    }
+}
+
+h2 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 48px;
+    color: $color-white;
+
+    @media (max-width: $media-breakpoint-sm-max) {
+        font-size: 20px;
+        line-height: 24px;
+    }
+}
+h3 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    color: $color-white;
+
+    @media (max-width: $media-breakpoint-sm-max) {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+
+p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0;
+    color: $color-grey;
+
+    @media (max-width: $media-breakpoint-md-max) {
+        font-size: 14px;
+        line-height: 18px;
+    }
+}

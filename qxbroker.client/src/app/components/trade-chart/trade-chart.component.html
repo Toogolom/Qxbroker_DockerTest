@@ -1,0 +1,54 @@
+<div class="trading-chart">
+    <div class="chart-wrapper">
+        <div id="chart-container" class="chart-container" style="position: relative;"></div>
+        <div class="chart-settings">
+            <div class="setting-item"><span class="icon-icon-pencil"></span></div>
+            <div class="setting-item">1m</div>
+            <div class="setting-item"><span class="icon-chart-candles-type"></span></div>
+        </div>
+    </div>
+    <div class="chart-top">
+        <div class="chart-assets">
+            <button class="asset-select-button" (click)="toggleDropdown()">
+                <span class="icon-plus"></span>
+            </button>
+            <div class="tabs">
+                <div class="items">
+                    <div    class="tab"
+                            *ngFor="let selectedPair of selectedTradePairs; let i = index"
+                            [ngClass]="selectedPair.code === selectedCurrency ? 'active' : ''"
+                            [style.left]="getLeftPosition(i)"
+                            [style.zIndex]="i"
+                            (click)="selectCurrency(selectedPair.code)">
+                        <div class="tab-container">
+                            <div class="flags">
+                                <!--icons-->
+                                <span class="icon-flag-btc"></span>
+                                <span class="icon-flag-btc"></span>
+                            </div>
+                            <div class="block">
+                                <div class="block-label">
+                                    <div class="label">{{ selectedPair.name }}</div>
+                                </div>
+                                <div class="block-payout">
+                                    <div class="payout">{{ selectedPair.profitFromOneMin }}%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-close" *ngIf="selectedPair.code === selectedCurrency" (click)="deselectPair(selectedPair)">
+                            <span class="icon-close"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-dropdown   *ngIf="isDropdownOpen"
+                            [tradePairs]="tradePairsList"
+                            (onPairSelect)="selectPair($event)"
+                            (onPairFavorite)="toggleFavorite($event)"
+                            (onDropdownClose)="isDropdownOpen = false">
+            </app-dropdown>
+        </div>
+        <app-alerts></app-alerts>
+    </div>
+    <app-trades-alert></app-trades-alert>
+</div>

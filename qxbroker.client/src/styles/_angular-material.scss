@@ -1,0 +1,27 @@
+// Datepicker
+.mat-datepicker-content,
+.mat-calendar {
+    border-radius: 13px;
+    background-color: #353a4d;
+}
+
+.mat-calendar-body-cell-content {
+    color: #FFFFFF !important;
+}
+
+.mat-calendar-body-label, .mat-calendar-period-button {
+    color: #FFFFFF !important;
+}
+
+.mat-calendar-table-header tr th {
+    color: #FFFFFF !important;
+}
+
+.mat-calendar-previous-button::after,
+.mat-calendar-next-button::after {
+    color: #FFFFFF !important;
+}
+
+.mat-calendar-arrow {
+    fill: #FFFFFF !important;
+}

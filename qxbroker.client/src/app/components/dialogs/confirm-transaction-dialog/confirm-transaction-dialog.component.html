@@ -1,0 +1,32 @@
+<div class="modal center" [class.active]="dialogService.dialogVisible$ | async">
+	<div class="container modal-confirm-transaction">
+		<div class="dialog" appClickOutside (clickOutside)="closeDialog()">
+			<button class="close" type="button" title="Close">
+				<span class="icon-close" (click)="closeDialog()"></span>
+			</button>
+			<div class="p-10">
+				<div class="header">
+					<span class="title">Confirm Transaction</span>
+				</div>
+			</div>
+			<div class="body">
+				<div	class="upload-area"
+						(dragover)="onDragOver($event)"
+						(dragleave)="onDragLeave($event)"
+						(drop)="onDrop($event)"
+						(click)="fileInput.click()"
+						[class.dragging]="isDragging">
+					<p *ngIf="!selectedPhoto">Drag and drop a transaction photo here or click to select</p>
+					<p *ngIf="selectedPhoto">File: {{ selectedPhoto.name }}</p>
+					<input	type="file"
+							#fileInput
+							accept="image/*"
+							(change)="onFileSelected($event)"
+							hidden/>
+				</div>
+				<img *ngIf="photoPreview" [src]="photoPreview" alt="Preview" class="preview" />
+				<button class="button button-primary button-send" (click)="sendTransactionImage()" [disabled]="!selectedPhoto">Send</button>
+			</div>
+		</div>
+	</div>
+</div>

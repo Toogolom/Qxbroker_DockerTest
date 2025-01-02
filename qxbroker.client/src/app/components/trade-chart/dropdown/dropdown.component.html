@@ -1,0 +1,85 @@
+<div class="asset-select-dropdown" appClickOutside (clickOutside)="closeDropdown()">
+	<div class="title">
+		<span>Select trade pair</span>
+		<span class="icon-close" (click)="closeDropdown()"></span>
+	</div>
+	<div class="filters">
+		<button class="filter" [ngClass]="tradePairType === 'currencies' ? 'active' : ''" (click)="tradePairType = 'currencies'">Currencies</button>
+		<button class="filter" [ngClass]="tradePairType === 'crypto' ? 'active' : ''" (click)="tradePairType = 'crypto'">Crypto</button>
+		<button class="filter disabled" [ngClass]="tradePairType === 'commodities' ? 'active' : ''" (click)="tradePairType = 'commodities'">Commodities</button>
+		<button class="filter disabled" [ngClass]="tradePairType === 'stocks' ? 'active' : ''" (click)="tradePairType = 'stocks'">Stocks</button>
+	</div>
+	<div class="row">
+		<div class="favorites" (click)="showFavorites()" [ngClass]="showFavoritesOnly ? 'active' : ''">
+			<span class="icon-favorite-filled"></span>
+			<div>{{ favoritesCount }}</div>
+		</div>
+		<div class="search">
+			<div class="button">
+				<span class="icon-search"></span>
+			</div>
+			<input class="input"  [(ngModel)]="searchText" type="text" placeholder="Search">
+		</div>
+	</div>
+	<div class="select-list-wrapper">
+		<div class="content">
+			<div class="list">
+				<div class="header">
+					<div class="item" (click)="setSort('name')">
+						<a>Name</a>
+						<span 	*ngIf="sortColumn === 'name'"
+								class="icon-sort-mark" 
+								[ngClass]="sortDirection === 'asc'? 'rotate' : ''"></span>
+					</div>
+					<div class="item" (click)="setSort('changePercent')">
+						<a>24h changing</a>
+						<span 	*ngIf="sortColumn === 'changePercent'"
+								class="icon-sort-mark" 
+								[ngClass]="sortDirection === 'asc'? 'rotate' : ''"></span>
+					</div>
+					<div class="item" (click)="setSort('profitFromOneMin')">
+						<a>Profit 1+ min</a>
+						<span 	*ngIf="sortColumn === 'profitFromOneMin'"
+							class="icon-sort-mark" 
+							[ngClass]="sortDirection === 'asc'? 'rotate' : ''"></span>
+					</div>
+					<div class="item" (click)="setSort('profitFromOneMin')">
+						<a>5+ min</a>
+						<span 	*ngIf="sortColumn === 'profitFromOneMin'"
+								class="icon-sort-mark" 
+								[ngClass]="sortDirection === 'asc'? 'rotate' : ''"></span>
+					</div>
+				</div>
+				<div class="body">
+					<ng-container *ngFor="let pair of filteredTradePairs; let i = index">
+						<div class="item"  (click)="selectPair(pair)">
+							<div class="favorite" (click)="toggleFavorite(pair)">
+								<span class="icon-favorite" *ngIf="!pair.isFavorite"></span>
+								<span class="icon-favorite-filled" *ngIf="pair.isFavorite"></span>
+							</div>
+							<div class="name">
+								<!--icons-->
+								<span>{{ pair.name }}</span>
+								<div class="added" *ngIf="pair.selected">
+									<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M0.0923077 4.32078C0.0307692 4.25678 0 4.16078 0 4.09678C0 4.03278 0.0307692 3.93678 0.0923077 3.87278L0.523077 3.42478C0.646154 3.29678 0.830769 3.29678 0.953846 3.42478L0.984615 3.45678L2.67692 5.34478C2.73846 5.40878 2.83077 5.40878 2.89231 5.34478L7.01538 0.896781H7.04615C7.16923 0.768781 7.35385 0.768781 7.47692 0.896781L7.90769 1.34478C8.03077 1.47278 8.03077 1.66478 7.90769 1.79278L2.98462 7.10478C2.92308 7.16878 2.86154 7.20078 2.76923 7.20078C2.67692 7.20078 2.61538 7.16878 2.55385 7.10478L0.153846 4.41678L0.0923077 4.32078Z" fill="white"></path></svg>
+									<span>Added</span>
+								</div>
+							</div>
+							<div class="change">
+								<!--icons-->
+								<span>{{ pair.changePercent }}%</span>
+							</div>
+							<div class="percent payout-one text-center">
+								<span>{{ pair.profitFromOneMin }}%</span>
+							</div>
+							<div class="percent payout-two">
+								<span>{{ pair.profitFromFiveMin }}%</span>
+							</div>
+						</div>
+						<hr *ngIf="lastFavoriteIndex === i && !showFavoritesOnly">
+					</ng-container>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

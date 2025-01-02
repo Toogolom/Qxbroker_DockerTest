@@ -1,0 +1,260 @@
+@import "../../../styles/variables";
+
+.footer {
+    max-width: 1392px;
+    width: 100%;
+    margin: 0 auto;
+
+    @media (max-width: 1392px) {
+        max-width: 1232px;
+        padding: 0 24px;
+    }
+
+    @media (max-width: 700px) {
+        padding: 0 12px;
+    }
+
+    .footer-items {
+        padding: 48px 76px 48px 48px;
+        border-radius: 16px;
+        background: #151825;
+        display: flex;
+        color: $color-white;
+    
+        @media (max-width: 1392px) {
+            padding: 48px;
+        }
+    
+        @media (max-width: 600px) {
+            padding: 24px;
+            display: block;
+        }
+
+        .footer-logo {
+            margin-right: 50px;
+    
+            @media (max-width: 600px) {
+                margin: 0 0 24px 0;
+    
+                img {
+                    width: 83px;
+                }
+            }
+        }
+    
+        .footer-navigation {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(200px, 220px));
+            grid-column-gap: 24px;
+            margin: 0 auto;
+        
+            @media (max-width: 1045px) {
+                grid-template-columns: repeat(2, minmax(200px, 220px));
+                grid-row-gap: 36px;
+            }
+        
+            @media (max-width: 825px) {
+                grid-template-columns: repeat(1, minmax(200px, 220px));
+                grid-row-gap: 36px;
+            }
+        
+            @media (max-width: 600px) {
+                margin-bottom: 30px;
+            }
+
+            .nav-header {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                color: $color-white;
+                margin: 0;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 20px;
+
+                svg {
+                    fill: $color-white;
+                }
+
+                &:hover {
+                    color: $color-blue;
+
+                    svg {
+                        fill: $color-blue;
+                    }
+                }
+            }
+
+            .link-item {
+                margin: 18px 0 0 0;
+                color: $color-grey-2;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 20px;
+                border: 0;
+                letter-spacing: normal;
+                display: flex;
+                align-items: center;
+                gap: 2px;
+        
+                svg {
+                    stroke: $color-grey-2;
+                }
+        
+                &:hover {
+                    color: $color-white;
+        
+                    svg {
+                        stroke: $color-white;
+                    }
+                }
+
+            }
+
+            .more-section-title {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                color: $color-white;
+                margin: 0;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 20px;
+            }
+        }
+
+        .footer-social-title {
+            color: $color-grey-2;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+        }
+
+        .footer-playmarket {
+            margin: 12px 0 24px;
+
+            .playmatket-image {
+                max-width: 136px;
+            }
+        }
+        .footer-social-item {
+            max-width: 140px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+            border-radius: 8px;
+            background: rgba(2, 111, 211, 0.10);
+            margin-top: 12px;
+            color: #026FD3;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+    
+            @media (max-width: 1392px) {
+                max-width: 100%;
+                width: 200px;
+            }
+    
+            @media (max-width: 1110px) {
+                max-width: none;
+                width: auto;
+            }
+    
+            @media (max-width: 600px) {
+                width: 176px;
+            }
+    
+            .icon {
+                flex: none;
+                margin-right: 24px;
+                content: '';
+                display: block;
+                width: 16px;
+                height: 16px;
+                background-repeat: no-repeat;
+                background-size: contain;
+
+                &.icon-facebook {
+                    background-image: url("../../../assets/images/footer/facebook.svg");
+                }
+                &.icon-instagram {
+                    background-image: url("../../../assets/images/footer/instagram.svg");
+                }
+                &.icon-telegram {
+                    background-image: url("../../../assets/images/footer/telegram.svg");
+                }
+            }
+    
+            .count {
+                width: 100%;
+                text-align: center;
+            }
+    
+            &:hover {
+                background: rgba(2, 111, 211, 0.20);
+            }
+        }
+    }
+
+    .footer-bottom {
+        display: grid;
+        grid-template-columns: max(300px) 1fr;
+        padding: 48px;
+        gap: 24px;
+        
+        @media (max-width: 600px) {
+            grid-template-columns: 1fr;
+            padding: 24px;
+            gap: 28px;
+        }
+
+        .bottom-title {
+            display: flex;
+            align-items: center;
+            color: $color-white;
+            margin: 0;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 16px;
+        }
+
+        .bottom-nav-list .nav-link {
+            margin: 18px 0 0 0;
+        }
+        .bottom-link-item {
+            color: $color-grey3;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 14px;
+            border: 0;
+            letter-spacing: normal;
+    
+            &:hover {
+                color: $color-white;
+            }
+        }
+
+        .footer-text {
+            color: $color-grey3;
+            padding-bottom: 15px;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+        }
+    }
+}
+.footer-navigation, .navigation, .nav-item, .bottom-navigation, .nav-link, .bottom-nav-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}

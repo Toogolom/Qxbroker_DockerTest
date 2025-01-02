@@ -1,0 +1,161 @@
+@import "../../../../styles/_variables";
+
+.container {
+	max-width: 1392px;
+	width: 100%;
+	margin: 120px auto;
+	color: $color-white;
+
+	display: flex;
+	flex-direction: column;
+	row-gap: 50px;
+
+	@media (max-width: 1392px) {
+		padding: 0 24px;
+	}
+
+	@media (max-width: 567px) {
+		margin: 48px auto;
+	}
+
+	.btn-back {
+		width: fit-content;
+	}
+
+	.body {
+		.title {
+			color: $color-white;
+			font-size: 45px;
+			font-weight: 900;
+			margin-bottom: 70px;
+			line-height: 40px;
+	
+			@media (max-width: 768px) {
+				font-size: 32px;
+			}
+		}
+
+		.description {
+			color: #8D94AB;
+			font-size: 20px;
+			line-height: 30px;
+
+			@media (max-width: 1023px)  {
+				font-size: 16px;
+				line-height: 24px;
+			}
+		}
+
+		.box {
+			display: flex;
+			column-gap: 20px;
+
+			@media(max-width: 567px) {
+				flex-direction: column;
+				flex-wrap: wrap;
+			}
+
+			.topics {
+				flex: 3;
+				display: flex;
+				flex-direction: column;
+				row-gap: 20px;
+
+				.topic {
+					background: #151825;
+					border-radius: 6px;
+					margin-bottom: 12px;
+					padding: 10px;
+	
+					.button {
+						border: none;
+						background-color: rgba(2, 111, 211, 0.1);
+						color: $color-white;
+						display: flex;
+						flex-direction: column;
+						padding: 5px 8px;
+						position: relative;
+						width: 100%;
+	
+						.title {
+							color: $color-white;
+							font-size: 16px;
+							font-weight: 500;
+							margin-bottom: 5px;
+							text-align: left;
+						}
+	
+						.subtopics-count {
+							font-size: 12px;
+							font-weight: 600;
+							margin-top: 5px;
+							color: #8D94AB;
+						}
+					}
+					
+					.subtopics {
+						.subtopic {
+							display: flex;
+							align-items: center;
+							column-gap: 10px;
+							margin-top: 5px;
+
+							&:hover, &.active {
+								svg, .title {
+									color: $color-white;
+								}
+							}
+
+							svg {
+								color: #8D94AB;
+								margin-left: 10px;
+								width: 16px;
+								height: 16px;
+							}
+
+							.title {
+								cursor: pointer;
+								color: #8D94AB;
+								font-size: 14px;
+								font-weight: 400;
+								margin-bottom: 0;
+							}
+						}
+					}
+				}
+			}
+
+			.content {
+				flex: 7;
+				margin-top: 10px;
+				width: calc(100% - 250px);
+
+				@media(max-width: 567px) {
+					width: 100%;
+				}
+
+				.title {
+					color: $color-white;
+					font-size: 28px;
+					font-weight: 900;
+					margin-bottom: 30px;
+			
+					@media (max-width: 768px) {
+						font-size: 20px;
+					}
+				}
+
+				.body {
+					display: flex;
+					flex-direction: column;
+					
+					
+
+					@media(max-width: 567px) {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}

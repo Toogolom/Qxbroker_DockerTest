@@ -1,0 +1,86 @@
+@import "../../../../styles/_variables";
+
+.balance-values {
+    display: flex;
+    align-items: center;
+
+    .balance {
+        color: $color-white;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        min-height: 38px;
+        padding: 0 10px;
+        white-space: nowrap;
+        text-align: right;
+
+        .label {
+            margin-bottom: 2px;
+            opacity: 0.5;
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .value {
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 20px;
+            color: $color-white;
+        }
+
+        @media (max-width: 567px) {
+            display: none;
+        }
+
+		&.balance-margin {
+			margin-left: auto;
+		}
+
+		.currency {
+			align-items: center;
+			display: flex;
+
+			.balance-currency-icon {
+				background: $color-dark;
+				border-radius: 10px;
+				color: $color-white;
+				display: inline-block;
+				font-size: 14px;
+				font-weight: 700;
+				height: 20px;
+				line-height: 21px;
+				margin-right: 6px;
+				text-align: center;
+				width: 20px;
+			}
+
+			.balance-button {
+				background: $settings-btn-bckg;
+				border-radius: 4px;
+				color: $color-white;
+				cursor: pointer;
+				font-size: 10px;
+				font-weight: 900;
+				line-height: 12px;
+				margin-left: 8px;
+				padding: 4px 6px;
+				text-transform: uppercase;
+			}
+		}
+    }
+
+    .balance + .balance {
+        padding-left: 30px;
+        margin-left: 20px;
+        position: relative;
+    }
+
+    .balance + .balance::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        border-left: 1px solid $color-dark-3;
+    }
+}

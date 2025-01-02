@@ -1,0 +1,187 @@
+@import "_variables.scss";
+
+.btn {
+    color: $color-white;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-green {
+    background: $color-green;
+    padding: 16px 24px;
+    box-shadow: 0 4px 10px 0 $color-green-bs;
+    border-radius: 8px;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: .01em;
+    border-bottom: 1px dashed transparent;
+
+    @media (max-width: 680px) {
+        font-size: 14px;
+        line-height: 18px;
+        padding: 10px 12px;
+    }
+
+    &:hover {
+        background: $color-green-hover;
+    }
+}
+
+.login-btn {
+    background: $color-grey-btn;
+    padding: 12px 20px;
+    margin-right: 12px;
+
+    @media (max-width: 680px) {
+        font-size: 14px;
+        line-height: 18px;
+        padding: 10px 12px;
+    }
+}
+
+.form-button {
+    max-width: 366px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 19px 0;
+    margin: 0 auto;
+    background: #4a8ded;
+    box-shadow: 0 4px 10px rgba(2, 111, 211, .25);
+    border-radius: 4px;
+    margin-bottom: 38px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: $color-white;
+    border: 0;
+    cursor: pointer;
+    
+    &:hover {
+        background: $color-blue;
+    } 
+}
+
+.about-us-demo-btn {
+    width: 345px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-white;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    color: $color-dark;
+    border: 0;
+    cursor: pointer;
+    margin-right: 22px;
+
+    &:hover {
+        background: linear-gradient(0deg, #686F86, #686F86), $color-white;
+        color: $color-white;
+    }
+
+    @media (max-width: 870px) {
+        width: 100%;
+        height: 64px;
+    }
+}
+
+.about-us-innovation-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    bottom: 96px;
+
+    @media (max-width: $media-breakpoint-sm) {
+        display: block;
+        width: 240px;
+        bottom: 0;
+        margin: 34px auto 0;
+    }
+}
+
+.button-demo {
+    padding: 16px 24px;
+    color: $color-white;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    border-radius: 8px;
+    background: $color-grey-btn;
+
+    @media (max-width: 873px) {
+        max-width: 150px;
+        width: 100%;
+        text-align: center;
+    }
+
+    @media (max-width: 680px) {
+        font-size: 14px;
+        line-height: 18px;
+        padding: 10px 12px;
+    }
+
+    &:hover {
+        background: $color-dark;
+    }
+}
+
+.button {
+    cursor: pointer;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    padding: 12px 20px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background: none;
+    border-radius: 4px;
+    border: none;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+    -webkit-transition-property: color, background-color;
+    transition-property: color, background-color;
+}
+
+.button-primary {
+    color: #FFF;
+    background-color: #026FD3;
+    -webkit-box-shadow: 0 4px 10px rgba(2, 111, 211, 0.25);
+    box-shadow: 0 4px 10px rgba(2, 111, 211, 0.25);
+}
+
+.button-primary:not(.disabled):not([disabled]):hover {
+    color: #FFF;
+    background-color: #0989ff;
+    -webkit-box-shadow: 0 4px 10px rgba(9, 137, 255, 0.25);
+    box-shadow: 0 4px 10px rgba(9, 137, 255, 0.25);
+}
+
+.button.disabled, .button[disabled] {
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: .7;
+}

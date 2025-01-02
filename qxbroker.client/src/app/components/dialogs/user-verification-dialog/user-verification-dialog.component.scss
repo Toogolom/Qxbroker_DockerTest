@@ -1,0 +1,78 @@
+@import "../../../../styles/_variables.scss";
+
+.modal-user-verification {
+	max-width: 600px;
+	width: 100% !important;
+}
+
+@media (max-width: 567px) {
+	.modal.center {
+		align-items: flex-start;
+	}
+}
+
+.header {
+	border-bottom: 1px dashed $color-black-4;
+	display: flex;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+
+	@media only screen and (max-width: 424px) {
+		padding: 10px 10px 24px;
+	}
+
+	.title {
+		color: $color-white;
+		font-size: 20px;
+		font-weight: 700;
+		line-height: 24px;
+	}
+}
+
+.body {
+	display: flex;
+	flex-direction: column;
+}
+
+.upload-area {
+	border: 2px dashed $color-black-4;
+	border-radius: 8px;
+	padding: 20px;
+	color: $color-black-5;
+	text-align: center;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+  
+.upload-area.dragging {
+	background-color: $color-black-4;
+	border-color: $color-white;
+	color: $color-white;
+}
+  
+.preview {
+	display: block;
+	margin-top: 20px;
+	// margin: 20px auto 0 auto;
+	max-width: 100%;
+	max-height: 700px;
+	border: 1px solid $color-black-4;
+	border-radius: 8px;
+}
+
+.button-send {
+	margin-top: 20px;
+}
+
+.form-control .input-control-cabinet .input-control-cabinet-label {
+	background-color: $color-grey-btn;
+}
+
+.form-control {
+	margin-top: 20px;
+}
+
+.alert {
+	margin-top: 10px;
+	padding: 5px 10px;
+}

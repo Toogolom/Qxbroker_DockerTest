@@ -1,0 +1,28 @@
+.ng-select .ng-select-container {
+    margin-top: 5px;
+}
+
+.ng-dropdown-panel {
+    .ng-dropdown-panel-items {
+        color: #fff;
+        z-index: 100;
+        background-color: #606675;
+        border-radius: 7px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, .15);
+        padding: 16px;
+        right: 15px;
+        top: 15px;
+
+        .ng-option {
+            padding-top: 12px;
+            border-top: 1px solid rgba(182, 186, 194, .1);
+            margin-top: 15px;
+
+            &:first-child {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+                border-top: 0 !important;
+            }
+        }
+    }
+}

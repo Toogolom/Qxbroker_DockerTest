@@ -1,0 +1,205 @@
+@import "../../../../styles/_variables";
+
+:host {
+    overflow: hidden;
+    margin-right: auto;
+
+    @media (max-width: 1023px) {
+        overflow: visible;
+    }
+
+    @media (max-width: 1023px) and (max-width: 567px) {	
+        width: 100%;
+    }
+
+}
+
+.nav-links-container {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+
+    position: relative;
+    padding: 6px 10px;
+    margin: 0;
+    overflow: hidden;
+    background-color: $color-grey-btn;
+    border-radius: 4px;
+    
+
+    @media (max-width: 1023px) {
+        min-width: 125px;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+}
+
+.tabs {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    padding: 6px 10px;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    list-style-type: none;
+}
+
+@media (max-width: 1023px) {
+    .tabs.active .nav-links {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        top: calc(100% + 4px);
+        -webkit-animation: tabsFadeIn 200ms linear forwards;
+        animation: tabsFadeIn 200ms linear forwards;
+    }
+
+    .nav-links-container .nav-links {
+        padding: 4px 12px;
+        margin: 0;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        position: absolute;
+        z-index: 100;
+        right: 0;
+        left: 0;
+        color: $color-white;
+        background-color: $color-dark;
+        -webkit-box-shadow: 2px 2px 6px $color-modal-bg;
+        box-shadow: 2px 2px 6px $color-modal-bg;
+        border-radius: 4px;
+        font-weight: 900;
+        top: calc(100% - 2px);
+        -webkit-animation: tabsFadeOut 0ms linear forwards;
+        animation: tabsFadeOut 0ms linear forwards;
+    }
+
+    .nav-links-container .link {
+        padding: 8px 0;
+        margin: 0;
+    }
+
+    .nav-links-container li + li {
+        border-top: 1px solid $color-dark-3;
+    }
+}
+
+@media (max-width: 567px) {
+    .tabs.active .nav-links {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        top: calc(100% + 4px);
+        -webkit-animation: tabsFadeIn 200ms linear forwards;
+        animation: tabsFadeIn 200ms linear forwards;
+    }
+}
+
+.nav-links {
+    display: flex;
+    list-style-type: none;
+    margin: -6px -10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 6px 0 0;
+    scroll-snap-type: x mandatory;
+}
+
+.current-nav-link {
+    display: none;
+    color: $color-white;
+    position: relative;
+    padding: 15px 30px 15px 12px;
+    margin: 0;
+    width: 100%;
+    border-radius: 4px;
+    background-color: #353A4D;
+    -webkit-box-shadow: 2px 2px 6px $color-modal-bg;
+    box-shadow: 2px 2px 6px $color-modal-bg;
+    font-weight: 900;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-transition: all 133.33333ms linear;
+    transition: all 133.33333ms linear;
+    -webkit-transition-property: background-color, -webkit-transform;
+    transition-property: background-color, -webkit-transform;
+    transition-property: background-color, transform;
+    transition-property: background-color, transform, -webkit-transform;
+    font-size: 14px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        height: 6px;
+        width: 10px;
+        right: 12px;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: inherit;
+        transition: inherit;
+        background: url('/assets/images/arrow-light-down.svg') center no-repeat;
+        background-size: 9px 6px;
+    }
+}
+
+.nav-link {
+    color: $color-white;
+}
+
+.link {
+    background-color: transparent;
+    border-radius: 4px;
+    color: $color-white;
+    cursor: pointer;
+    display: flex;
+    font-weight: 900;
+    margin: 0 10px 6px;
+    min-height: 38px;
+    padding: 10px 12px;
+    position: relative;
+    scroll-snap-align: start;
+    text-decoration: none;
+    transition: all .1333333333333s linear;
+    transition-property: color, background-color, box-shadow;
+    white-space: nowrap;
+
+    &:hover {
+        background-color: $color-black-3;
+
+        @media (max-width: 1023px) {
+            color: $color-blue-2;
+            background: none;
+        }
+    }
+
+
+    @media (min-width: 1024px) {
+        &.active {
+            color: $color-white;
+            background-color: $color-dark-3;
+            -webkit-box-shadow: 2px 2px 6px $color-modal-bg;
+            box-shadow: 2px 2px 6px $color-modal-bg;
+            cursor: default;
+        }
+    }
+}
+
+@media (max-width: 1023px) {
+    .current-nav-link {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-links-container {
+        background-color: unset;
+    }
+}

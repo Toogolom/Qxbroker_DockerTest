@@ -1,0 +1,19 @@
+<div class="container">
+	<h1 class="title">Learning</h1>
+	<div class="body">
+		<div class="sections">
+			<a class="item" *ngFor="let section of sections" [routerLink]="['topic', section.id]">
+				<span [className]="section.icon"></span>
+				<div class="title">{{ section.title }}</div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="advantages">
+	<div class="container">
+		<div class="cover">
+			<div class="title">Take advantage of all the advantages of independent trading on the cryptocurrency markets.</div>
+			<div class="button btn-green" routerLink="/sign-up">Start trading</div>
+		</div>
+	</div>
+</div>

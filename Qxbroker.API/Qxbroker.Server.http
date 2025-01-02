@@ -1,0 +1,6 @@
+@Qxbroker.Server_HostAddress = http://localhost:7109
+
+GET {{Qxbroker.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

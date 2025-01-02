@@ -1,0 +1,114 @@
+<div class="modal center" [class.active]="dialogService.dialogVisible$ | async">
+	<div class="container modal-user-verification">
+		<div class="dialog" appClickOutside (clickOutside)="closeDialog()">
+			<button class="close" type="button" title="Close">
+				<span class="icon-close" (click)="closeDialog()"></span>
+			</button>
+			<form [formGroup]="verificationForm" (ngSubmit)="onSubmit()">
+				<div class="p-10">
+					<div class="header">
+						<span class="title">Verification</span>
+					</div>
+					<div class="body">
+						<div class="form-warning">
+							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="10" cy="10" r="10" fill="#FF8A00"></circle>
+								<path d="M10 15.8327C9.31092 15.8327 8.75 15.3092 8.75 14.666C8.75 14.0229 9.31092 13.4994 10 13.4994C10.6891 13.4994 11.25 14.0229 11.25 14.666C11.25 15.3092 10.6891 15.8327 10 15.8327ZM11.25 11.166C11.25 11.8092 10.6891 12.3327 10 12.3327C9.31092 12.3327 8.75 11.8092 8.75 11.166V5.33268C8.75 4.68954 9.31092 4.16602 10 4.16602C10.6891 4.16602 11.25 4.68954 11.25 5.33268V11.166Z" fill="white"></path>
+							</svg>
+							<span>
+								Please attach a photo of your passport. 
+								The image must be free of glare, unobstructed, and all text must be clearly readable.
+							</span>
+						</div>
+						<div	class="upload-area"
+								(dragover)="onDragOver($event)"
+								(dragleave)="onDragLeave($event)"
+								(drop)="onDrop($event)"
+								(click)="fileInput.click()"
+								[class.dragging]="isDragging">
+							<p *ngIf="!selectedPhoto">Drag and drop a passport photo here or click to select</p>
+							<p *ngIf="selectedPhoto">File: {{ selectedPhoto.name }}</p>
+							<input	type="file"
+									#fileInput
+									accept="image/*"
+									(change)="onFileSelected($event)"
+									hidden
+									required/>
+						</div>
+						<img *ngIf="photoPreview" [src]="photoPreview" alt="Preview" class="preview" [style]="'aspect-ratio: 1'"/>
+						<div>
+							<div class="form-control">
+								<label class="input-control-cabinet input-control-cabinet-text" for="first-name">
+									<span class="input-control-cabinet-label">First name:</span>
+									<input class="input-control-cabinet-input" type="text" name="first-name"  formControlName="firstName">
+								</label>
+								<div class="alert alert-danger" *ngIf="submitted && formControls['firstName'].invalid">
+									<div class="alert-icon">
+										<span class="icon-alert"></span>
+									</div>
+									<div class="alert-message">
+										First name is required
+									</div>
+								</div>
+							</div>
+							<div class="form-control">
+								<label class="input-control-cabinet input-control-cabinet-text" for="last-name">
+									<span class="input-control-cabinet-label">Last name:</span>
+									<input class="input-control-cabinet-input" type="text" name="last-name"  formControlName="lastName">
+								</label>
+								<div class="alert alert-danger" *ngIf="submitted && formControls['lastName'].invalid">
+									<div class="alert-icon">
+										<span class="icon-alert"></span>
+									</div>
+									<div class="alert-message">
+										Last name is required
+									</div>
+								</div>
+							</div>
+							<div class="form-control">
+								<label class="input-control-cabinet input-control-cabinet-text" for="tel">
+									<span class="input-control-cabinet-label">Phone number</span>
+									<input 	class="input-control-cabinet-input"  
+											type="text"
+											mask="0{15}"
+											prefix="+" 
+											name="tel"
+											[validation]="false"
+											formControlName="phone">
+								</label>
+								<div class="alert alert-danger" *ngIf="submitted && (formControls['phone'].errors?.['required'] || formControls['phone'].errors?.['invalidPhone'])">
+									<div class="alert-icon">
+										<span class="icon-alert"></span>
+									</div>
+									<div class="alert-message">
+										{{ formControls['phone'].errors | json }}
+										<span *ngIf="formControls['phone'].errors?.['required']">Invalid phone number</span>
+										<span *ngIf="formControls['phone'].errors?.['invalidPhone']">Invalid phone number format.</span>
+									</div>
+								</div>
+							</div>
+							<div class="form-control">
+								<label class="input-control-cabinet input-control-cabinet-text" for="trc">
+									<span class="input-control-cabinet-label">TRC20</span>
+									<input 	class="input-control-cabinet-input"  
+											type="text"
+											name="trc"
+											formControlName="trc20">
+								</label>
+								<div class="alert alert-danger" *ngIf="submitted && formControls['trc20'].invalid">
+									<div class="alert-icon">
+										<span class="icon-alert"></span>
+									</div>
+									<div class="alert-message">
+										Invalid TRC20 address
+									</div>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="button button-primary button-send">Send request</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

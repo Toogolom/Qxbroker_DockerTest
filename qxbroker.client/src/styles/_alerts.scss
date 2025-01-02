@@ -1,0 +1,295 @@
+@import "_variables.scss";
+
+.app-alerts {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.app-alerts .alert {
+    align-items: flex-start;
+    animation: notificationShow 1s ease forwards;
+    background-color: #494f65;
+    border-radius: 4px;
+    box-shadow: 2px 2px 6px rgba(28, 32, 46, 0.2);
+    color: #fff;
+    display: inline-flex;
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 8px;
+    padding: 10px 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.app-alerts .alert:not(:last-child) {
+    margin-bottom: 0.25rem;
+}
+
+.app-alerts .alert.alert-danger {
+    background-color: #d2502e;
+    border-color: transparent;
+}
+
+.app-alerts .alert.alert-primary,
+.app-alerts .alert.alert-warning,
+.app-alerts .alert.alert-secondary,
+.app-alerts .alert.alert-info {
+    background-color: #12a3f8;
+    border-color: transparent;
+}
+
+.app-alerts .alert.alert-success {
+    background-color: #0faf59;
+    box-shadow: 0 4px 10px rgba(5, 198, 94, 0.25);
+    border-color: transparent;
+}
+
+.app-alerts .alert .alert-container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 4px;
+    cursor: context-menu;
+    align-items: center;
+}
+
+.app-alerts .alert .alert-container .alert-text {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-weight: 500;
+    line-height: 16px;
+    font-size: 12px;
+    word-break: break-word;
+}
+
+.app-alerts .alert .alert-container .close-btn {
+    align-items: center;
+    background-color: #353a4d;
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-shrink: 0;
+    height: 16px;
+    justify-content: center;
+    margin-left: 10px;
+    padding: 0;
+    transition: all 0.1333333333333s linear;
+    width: 16px;
+}
+
+.app-alerts .alert .alert-container .close-btn .icon-close {
+    font-size: 6px;
+    cursor: pointer;
+    color: #fff;
+}
+
+@keyframes notificationShow {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes notificationHide {
+    0% {
+        opacity: 1;
+        transform: none;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+}
+
+.alert {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 20px 10px 20px 20px;
+    color: #ffffff;
+    background-color: rgba(255, 98, 81, 0.1);
+    border-radius: 4px;
+    border: 2px solid rgba(255, 98, 81, 0.3);
+    font-size: 14px;
+    line-height: 18px;
+
+    &-icon {
+        width: 24px;
+        height: 24px;
+        margin-top: 6px;
+        margin-right: 10px;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        background-color: #ff6251;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        border-radius: 50%;
+    }
+
+    &-message,
+    p {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        min-height: 36px;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.alert p ~ a,
+.alert-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: 700;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #0faf59;
+
+    &:hover {
+        color: #05c65e;
+    }
+}
+
+.alert.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.alert.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.trades-notifications {
+    bottom: 35px;
+    left: 125px;
+    position: absolute;
+    width: 220px;
+    z-index: 10;
+
+    .trades-notifications-item {
+        background-color: $color-dark;
+        border-radius: 4px;
+        box-shadow: 2px 4px 10px rgba(53, 58, 77, 0.15);
+        margin-bottom: 10px;
+        padding: 14px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .trades-notifications-header {
+            display: flex;
+
+            .trades-notifications-flags {
+                display: inline-flex;
+                margin-right: 8px;
+                color: #595f71;
+                align-items: center;
+
+                .flags {
+                    display: inline-flex;
+                    font-size: 16px;
+                    color: #4d5363;
+                    margin-right: 6px;
+                }
+
+                .flags > * {
+                    background-color: white;
+                    border-radius: 50%;
+                    box-shadow: 0 0 0 2px currentColor;
+                    float: left;
+                    height: 16px;
+                    width: 16px;
+                }
+
+                .flags > :not(:first-child) {
+                    margin-left: -4px;
+                }
+            }
+
+            .trades-notifications-name {
+                font-weight: 900;
+                max-width: 44%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color: $color-white;
+            }
+
+            .trades-notifications-time {
+                align-items: center;
+                color: $color-black-5;
+                display: flex;
+
+                &::before {
+                    color: $color-black-2;
+                    content: "·";
+                    display: inline-block;
+                    font-size: 18px;
+                    margin: 0 6px;
+                }
+            }
+        }
+
+        .trades-notifications-total {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 14px;
+
+            &.green {
+                color: #0faf59;
+            }
+
+            &.red {
+                color: #ff6251;
+            }
+        }
+
+        .trades-notifications-close {
+            right: 8px;
+            top: 0px;
+            position: absolute;
+
+            .icon-close {
+                font-size: 8px;
+                color: white;
+                opacity: .3;
+            }
+        }
+    }
+}
+
+.alert.success .alert-icon {
+    background-color: #05c65e;
+}
+
+.alert.success {
+    background-color: rgba(124, 242, 103, 0.1);
+    border: 2px solid rgba(30, 255, 0, 0.3);
+}

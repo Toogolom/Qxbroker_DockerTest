@@ -1,0 +1,171 @@
+<header class="header settings-header">
+    <div class="header-brand">
+        <a class="header-logo">
+            <span class="logo"></span>
+        </a>
+        <div class="header-title">Web Trading Platform</div>
+    </div>
+    <div class="header-mobile-menu"></div>
+    <div class="header-banner" *ngIf="isTargetRoute && !hasTransactions">
+        <img class="header-banner-bg" src="/assets/images/header-bonus-banner.png">
+        <a class="header-banner-container" [routerLink]="['/deposit']" [queryParams]="{ fromBonusBanner: 'true' }">
+            <img class="header-banner-icon" src="/assets/images/header-bonus-banner-rocket.png" alt="">
+            <span>Get 30% bonus on your first deposit</span>
+            <div class="header-banner-percents">30%</div>
+        </a>
+    </div>
+    <div class="header-container">
+        <div class="usermenu" (click)="openUserMenu()">
+            <div class="usermenu-info">
+                <div class="usermenu-info-status">
+                    <ng-container *ngIf="!(user$ | async)?.urlProfileImage">
+                        <img class="avatar" [src]="'/assets/images/user-statuses/UserPhoto.png'">
+                    </ng-container>
+                    <ng-container *ngIf="(user$ | async)?.urlProfileImage">
+                        <img class="avatar-custom" [src]="formattedUserPhotoURL((user$ | async)?.urlProfileImage ?? '')">
+                    </ng-container>
+                    <ng-container *ngIf="(user$ | async)?.vipStatus === VipStatus.Standart">
+                        <img class="avatar-border" [src]="'/assets/images/user-statuses/Standart.png'">
+                    </ng-container>
+                    <ng-container *ngIf="(user$ | async)?.vipStatus === VipStatus.Premium">
+                        <img class="avatar-border" [src]="'/assets/images/user-statuses/Premium.png'">
+                    </ng-container>
+                    <ng-container *ngIf="(user$ | async)?.vipStatus === VipStatus.Vip">
+                        <img class="avatar-border" [src]="'/assets/images/user-statuses/Vip.png'">
+                        <img class="avatar-border crown" [src]="'/assets/images/user-statuses/Crown(vip).png'">
+                    </ng-container>
+                </div>
+                <div class="usermenu-info-wrapper"></div>
+                <div class="usermenu-info-text">
+                    <div class="usermenu-info-name">{{  (accountType | async) === AccountType.Live ? 'Real Balance' : 'Demo Balance' }}</div>
+                    <div class="usermenu-info-balance">{{  
+                        (accountType | async) === AccountType.Live 
+                            ? ((this.user$ | async)?.totalBalance | currency)
+                            : ((this.user$ | async)?.demoBalance | currency) 
+                    }}</div>
+                </div>
+                <div class="usermenu-info-caret">
+                    <span class="icon-caret"></span>
+                </div>
+            </div>
+            <div class="usermenu-dropdown" *ngIf="userMenuOpened" appClickOutside (clickOutside)="closeUserMenu()" @dropdownAnimation>
+                <ul class="usermenu-select">
+                    <li class="usermenu-select-item" (click)="openUserStatusDialog()">
+                        <div class="usermenu-status">
+                            <div class="status-icon">
+                                <ng-container *ngIf="!(user$ | async)?.urlProfileImage">
+                                    <img class="avatar" [src]="'/assets/images/user-statuses/UserPhoto.png'">
+                                </ng-container>
+                                <ng-container *ngIf="(user$ | async)?.urlProfileImage">
+                                    <img class="avatar-custom" [src]="formattedUserPhotoURL((user$ | async)?.urlProfileImage ?? '')">
+                                </ng-container>
+                                <ng-container *ngIf="(user$ | async)?.vipStatus === VipStatus.Standart">
+                                    <img class="avatar-border" [src]="'/assets/images/user-statuses/Standart.png'">
+                                </ng-container>
+                                <ng-container *ngIf="(user$ | async)?.vipStatus === VipStatus.Premium">
+                                    <img class="avatar-border" [src]="'/assets/images/user-statuses/Premium.png'">
+                                </ng-container>
+                                <ng-container *ngIf="(user$ | async)?.vipStatus === VipStatus.Vip">
+                                    <img class="avatar-border" [src]="'/assets/images/user-statuses/Vip.png'">
+                                    <img class="avatar-border crown" [src]="'/assets/images/user-statuses/Crown(vip).png'">
+                                </ng-container>
+                            </div>
+                            <div class="status-info">
+                                <span class="text-secondary">{{ "Current status" + ':' | uppercase }}</span>
+                                <div class="profit">
+                                    {{ (this.user$ | async)?.vipStatus | uppercase }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="usermenu-data">
+                            <span class="email">{{ (this.user$ | async)?.email }}</span>
+                            <div class="id">
+                                <span class="text-secondary">ID:</span>
+                                <span class="text-secondary">{{ (this.user$ | async)?.uid }}</span>
+                            </div>
+                        </div>
+                        <div class="usermenu-currency">
+                            <span class="text-secondary">Currency:</span>
+                            <span class="currency">{{ (this.user$ | async)?.currency }}</span>
+                        </div>
+                    </li>
+                    <ng-container *ngIf="accountType | async as currentAccountType">
+                        <li class="usermenu-select-item usermenu-select-item-radio"
+                            [ngClass]="{ 'active': currentAccountType === AccountType.Live }">
+                            <a  class="usermenu-select-name" 
+                                [ngClass]="{ 'active': currentAccountType === AccountType.Live }"
+                                (click)="changeAccountType(AccountType.Live)">
+                                Live Account
+                            </a>
+                            <div class="usermenu-select-balance">
+                                <span>{{ (this.user$ | async)?.totalBalance | currency }}</span>
+                            </div>
+                        </li>
+                        <li class="usermenu-select-item usermenu-select-item-radio"
+                            [ngClass]="{ 'active': currentAccountType === AccountType.Demo }">
+                            <a  class="usermenu-select-name" 
+                                [ngClass]="{ 'active': currentAccountType === AccountType.Demo }"
+                                (click)="changeAccountType(AccountType.Demo)">
+                                Demo Account
+                            </a>
+                            <div class="usermenu-select-balance">
+                                <span>{{ (this.user$ | async)?.demoBalance | currency }}</span>
+                                <div class="usermenu-select-refresh" (click)="updateDemoBalance(10000)">
+                                    <span class="icon-refresh"></span>
+                                </div>
+                            </div>
+                            <div class="usermenu-select-edit-balance" (click)="toggleEditBalanceInput()">
+                                <span class="icon-pencil" [ngClass]="editBalanceInputOpened ? 'active' : '' "></span>
+                            </div>
+                            <div class="usermenu-select-edit-balance-input" *ngIf="editBalanceInputOpened">
+                                <form [formGroup]="updateDemoBalanceForm" (ngSubmit)="updateDemoBalance()">
+                                    <label class="input-control input-control-text" [ngClass]="{ 'invalid': updateDemoBalanceForm.invalid }">
+                                        <span class="input-control-label">New Value</span>
+                                        <input class="input-control-input" formControlName="balance">
+                                    </label>
+                                    <div *ngIf="updateDemoBalanceForm.invalid" class="input-control-hint">Max. $10000</div>
+                                    <button class="confirm-button" type="submit">
+                                        <span>Confirm</span>
+                                        <span class="icon-arrow-right-circle"></span>
+                                    </button>
+                                </form>
+                            </div>
+                        </li>
+                    </ng-container>
+                </ul>
+                <ul class="usermenu-menu">
+                    <li class="usermenu-menu-item">
+                        <a class="usermenu-menu-link" (click)="navigateTo('deposit')">Deposit</a>
+                    </li>
+                    <li class="usermenu-menu-item">
+                        <a class="usermenu-menu-link" (click)="navigateTo('withdrawal')">Withdrawal</a>
+                    </li>
+                    <li class="usermenu-menu-item">
+                        <a class="usermenu-menu-link" (click)="navigateTo('transactions')">Transactions</a>
+                    </li>
+                    <li class="usermenu-menu-item">
+                        <a class="usermenu-menu-link" (click)="navigateTo('trades')">Trades</a>
+                    </li>
+                    <li class="usermenu-menu-item">
+                        <a class="usermenu-menu-link" (click)="navigateTo('settings')">Account</a>
+                    </li>
+                    <li class="usermenu-menu-logout">
+                        <a class="usermenu-menu-link logout" (click)="logout()">
+                            <span class="icon-logout"></span>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="header-sidebar">
+            <a class="btn btn-green button-success button-small header-sidebar-button deposit" routerLink="/deposit">
+                <div class="button-icon">
+                    <span class="icon-plus"></span>
+                </div>
+                <span>Deposit</span>
+            </a>
+            <a class="btn login-btn button-small header-sidebar-button hide-md-down" routerLink="/withdrawal">Withdrawal</a>
+        </div>
+    </div>
+</header>

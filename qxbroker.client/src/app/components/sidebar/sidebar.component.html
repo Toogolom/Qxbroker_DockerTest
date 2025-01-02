@@ -1,0 +1,69 @@
+<aside class="sidebar settings-sidebar settings-open">
+    <div>
+        <span class="icon-burger-sidebar sidebar-toggle"></span>
+    </div>
+    <nav class="sidebar-buttons">
+        <a [routerLink]="'/trade'" routerLinkActive="active" class="sidebar-button open-name">
+            <div class="sidebar-button-icon">
+                <span class="sidebar-icon icon-trade-sidebar"></span>
+                <span class="sidebar-button-text">Trade</span>
+            </div>
+        </a>
+        <button class="sidebar-button open-name" data-text=" Помощь">
+            <div class="sidebar-button-icon">
+                <span class="sidebar-icon icon-help-sidebar"></span>
+                <span class="sidebar-button-text">Help</span>
+            </div>
+        </button>
+        <a routerLink="/settings" routerLinkActive="active" class="sidebar-button open-name">
+            <div class="sidebar-button-icon">
+                <span class="sidebar-icon icon-profile-sidebar"></span>
+                <span class="sidebar-button-text">Profile</span>
+            </div>
+        </a>
+        <a data-text="Deals" class="sidebar-button open-name">
+            <div class="sidebar-button-icon">
+                <!-- <svg class="icon-tournaments"></svg> -->
+                <span class="sidebar-button-text">Deals</span>
+            </div>
+        </a>
+        <a routerLink="/deposit" data-text="Top up" class="sidebar-button open-name">
+            <div class="sidebar-button-icon">
+                <!-- <svg class="icon-market"></svg> -->
+                <span class="sidebar-button-text">Deposit</span>
+            </div>
+        </a>
+        <a routerLink="/withdrawal" data-text="Withdrawal" class="sidebar-button open-name">
+            <div class="sidebar-button-icon">
+                <!-- <svg class="icon-market"></svg> -->
+                <span class="sidebar-button-text">Withdrawal</span>
+            </div>
+        </a>
+    </nav>
+    <div class="sidebar-usermenu">
+        <div class="sidebar-usermenu-head"></div>
+        <nav class="sidebar-list-menu">
+            <a class="sidebar-list-menu-link">Deposit</a>
+            <a class="sidebar-list-menu-link">Withdrawal</a>
+            <a class="sidebar-list-menu-link">Transactions</a>
+            <a class="sidebar-list-menu-link">Deals</a>
+            <a class="sidebar-list-menu-link active">Profile</a>
+        </nav>
+    </div>
+    <div class="sidebar-footer sidebar-footer-closed">
+        <div class="sidebar-livechat">
+            <a href="" class="sidebar-livechat-status online"> Help </a>
+        </div>
+    </div>
+    <div class="sidebar-footer sidebar-footer-open">
+        <nav class="sidebar-list-menu sidebar-list-menu-tiny">
+            <a class="list-menu-link" href="/about-us/">About us</a>
+            <a class="sidebar-list-menu-link">Help</a>
+        </nav>
+        <a class="sidebar-logout" href="/logout">
+            <svg class="icon-logout"></svg>
+            Quit
+        </a>
+    </div>
+</aside>
+<aside class="sidepanel user-settings-sidepanel sidepanel-bg-black"></aside>

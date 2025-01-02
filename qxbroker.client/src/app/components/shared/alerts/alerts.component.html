@@ -1,0 +1,12 @@
+<div class="app-alerts">
+    <div class="alert" role="alert" [ngClass]="'alert-' + alert.type"
+        [style.animationName]="alert.isClosing ? 'notificationHide' : 'notificationShow'"
+        [style.animationDuration]="alert.isClosing ? '400ms' : '800ms'"
+        *ngFor="let alert of model">
+        <div class="alert-container">
+            <div class="alert-text">{{alert.text || customText}}</div>
+            <app-close-btn-with-timer [timeLimitInMS]="autoHideTimeout" [event]="event.asObservable()"
+                (timeElapsed)="close(alert)"></app-close-btn-with-timer>
+        </div>
+    </div>
+</div>

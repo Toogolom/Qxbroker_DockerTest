@@ -1,0 +1,213 @@
+<!-- page-content -->
+<div class="page page-content">
+    <!-- settings-header -->
+
+    <!-- settings-content -->
+    <main class="page-body page-body-cabinet">
+        <div class="content-section-block">
+            <div class="page-content-header">
+                <app-navigation-links></app-navigation-links>
+                <app-balance-values [showCurrentCurrency]="true"></app-balance-values>
+            </div>
+            <div class="profile-page page-sections">
+                <div class="page-sections-row">
+                    <div class="page-sections-column grow-2of4">
+                        <div class="page-sections-row">
+                            <form class="content-section grow-1of2 shrink profile-form form">
+                                <div class="content-section-head"> Personal data:</div>
+                                <div class="form-control">
+                                    <div class="form-avatar">
+                                        <div class="form-avatar-image-block">
+                                            <div class="form-avatar-avatar">
+                                                <div class="avatar-profile">
+                                                    <ng-template #default>
+                                                        <img class="avatar" [src]="'/assets/images/user-statuses/UserPhoto.png'">
+                                                    </ng-template>
+
+                                                    <ng-container *ngIf="(user$ | async)?.urlProfileImage; else default">
+                                                        <img [src]="formattedUserPhotoURL((user$ | async)?.urlProfileImage ?? '')" alt="">
+                                                    </ng-container>
+                                                </div>
+                                            </div>
+                                            <div class="form-avatar-photo" *ngIf="!(user$ | async)?.urlProfileImage">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                    <g opacity="0.3">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.23242 2.99192C6.43973 2.38469 7.01032 1.97656 7.65197 1.97656H12.4504C13.0981 1.97656 13.6726 2.39228 13.8752 3.00749L14.4179 4.65602H16.1466C17.2511 4.65602 18.1466 5.55145 18.1466 6.65602V15.2208C18.1466 16.3254 17.2511 17.2208 16.1466 17.2208H3.85156C2.74699 17.2208 1.85156 16.3254 1.85156 15.2208V6.65602C1.85156 5.55145 2.74699 4.65602 3.85156 4.65602H5.66429L6.23242 2.99192ZM10.0001 15.3731C12.6773 15.3731 14.8476 13.2028 14.8476 10.5257C14.8476 7.84848 12.6773 5.6782 10.0001 5.6782C7.32295 5.6782 5.15267 7.84848 5.15267 10.5257C5.15267 13.2028 7.32295 15.3731 10.0001 15.3731Z"></path>
+                                                        <circle cx="9.99678" cy="10.528" r="3.26241"></circle>
+                                                    </g>
+                                                </svg>
+                                                <input class="upload-control-input" (change)="onFileSelected($event)" type="file" name="file" accept=".jpg, .jpeg, .png"/>
+                                            </div>
+                                            <div class="form-avatar-photo delete" *ngIf="(user$ | async)?.urlProfileImage" (click)="deleteUserPhoto()">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                    <g> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1041 2.67743H15.7014C16.414 2.67743 17.0013 3.13677 17.0013 3.70973V4.75848C17.0013 5.33112 16.414 5.80078 15.7014 5.80078H4.30497C3.59282 5.80078 3.00391 5.33112 3.00391 4.75848V3.70973C3.00391 3.13677 3.59282 2.67743 4.30497 2.67743H7.90227C8.2724 2.02926 9.07327 1.60156 10.0034 1.60156C10.9331 1.60156 11.7344 2.02926 12.1041 2.67743ZM5.62412 18.3986C4.95105 18.3986 4.40583 17.8697 4.40583 17.2185V7.20073H15.6037V17.2185C15.6037 17.8705 15.0597 18.3986 14.3862 18.3986H5.62412ZM7.70422 10.0008C7.42808 10.0008 7.20422 10.2246 7.20422 10.5008V15.0997C7.20422 15.3759 7.42808 15.5997 7.70422 15.5997H8.10396C8.3801 15.5997 8.60396 15.3759 8.60396 15.0997V10.5008C8.60396 10.2246 8.3801 10.0008 8.10396 10.0008H7.70422ZM11.4034 10.5008C11.4034 10.2246 11.6273 10.0008 11.9034 10.0008H12.3032C12.5793 10.0008 12.8032 10.2246 12.8032 10.5008V15.0997C12.8032 15.3759 12.5793 15.5997 12.3032 15.5997H11.9034C11.6273 15.5997 11.4034 15.3759 11.4034 15.0997V10.5008Z"></path>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="form-avatar-block">
+                                            <div class="form-avatar-block-email"></div>
+                                            <div class="form-avatar-block-text">{{ 'ID: ' + (user$ | async)?.uid }}</div>
+                                            <div class="form-avatar-block-label warning">
+                                                <span class="icon-not-verified"></span>
+                                                Not confirmed
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content-section-onboarding">
+                                    <div class="form-control">
+                                        <label class="input-control-cabinet input-control-cabinet-tooltip-focus input-control-cabinet-text">
+                                            <span class="input-control-cabinet-label">Nickname</span>
+                                            <input name="nickname" class="input-control-cabinet-input"/>
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="input-control-cabinet input-control-cabinet-tooltip-focus input-control-cabinet-text">
+                                            <span class="input-control-cabinet-label" >First name</span>
+                                            <input name="first_name" class="input-control-cabinet-input"/>
+                                            <div class="input-control-cabinet-tooltip">
+                                                <div class="input-control-cabinet-tooltip-text">
+                                                    The name must be specified exactly as it appears in the document. Providing incorrect information may result in the account being deleted without warning.
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="input-control-cabinet input-control-cabinet-tooltip-focus input-control-cabinet-text">
+                                            <span class="input-control-cabinet-label">Second name</span>
+                                            <input name="last_name" class="input-control-cabinet-input"/>
+                                            <div class="input-control-cabinet-tooltip">
+                                                <div class="input-control-cabinet-tooltip-text">
+                                                    The surname must be specified exactly as in the document. For providing incorrect information, the account may be deleted without warning.
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="input-control-cabinet input-control-cabinet-tooltip-focus input-control-cabinet-text">
+                                            <span class="input-control-cabinet-label">Birthday</span>
+                                            <input name="birthday" type="date" class="input-control-cabinet-input" placeholder="Пусто" value=""/>
+                                            <div class="input-control-cabinet-tooltip">
+                                                <div class="input-control-cabinet-tooltip-text">
+                                                    It is not possible to change the date of birth in the future. If you specify the date incorrectly, it will be impossible to withdraw funds from the account.
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="input-control-cabinet input-control-cabinet-text input-control-cabinet-border disabled">
+                                            <span class="input-control-cabinet-label disabled">Email</span>
+                                            <input class="input-control-cabinet-input" disabled="" type="email"/>
+                                            <div class="input-control-cabinet-badge">
+                                                <div class="input-control-cabinet-status input-control-cabinet-status-success">
+                                                    Confirmed
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="input-control-cabinet input-control-cabinet-tooltip-focus input-control-cabinet-text">
+                                            <span class="input-control-cabinet-label">Address</span>
+                                            <input name="address" class="input-control-cabinet-input"/>
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="form-submit btn settings-btn button-primary">
+                                        Save
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="content-section grow-1of2 form">
+                                <div class="content-section-head">
+                                    Verification of documents:
+                                </div>
+                                <div class="alert">
+                                    <div class="alert-icon alert-icon-icon">
+                                        <span class="icon-alert"></span>
+                                    </div>
+                                    <p class="alert-text">
+                                        You need to fill in your personal information before verifying your account.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-sections-column grow-2of4">
+                        <div class="page-sections-row" dir="auto">
+                            <div class="content-section grow-1of2">
+
+                                <form>
+                                    <div class="form-control">
+                                        <label class="input-control-cabinet input-control-cabinet-tooltip-focus input-control-cabinet-text">
+                                            <span class="input-control-cabinet-label">Old password</span>
+                                            <input name="old_password" type="password" class="input-control-cabinet-input"/>
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="input-control-cabinet input-control-cabinet-tooltip-focus input-control-cabinet-text">
+                                            <span class="input-control-cabinet-label" >New password</span>
+                                            <input name="new_password" type="password" class="input-control-cabinet-input"/>
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="input-control-cabinet input-control-cabinet-tooltip-focus input-control-cabinet-text">
+                                            <span class="input-control-cabinet-label">Confirm new password</span>
+                                            <input name="confirm_password" type="password" class="input-control-cabinet-input" placeholder="" value=""/>
+                                        </label>
+                                    </div>
+                                    <button class="btn form-submit settings-btn  button button-primary" type="submit">
+                                        Change password
+                                    </button>
+                                </form>
+                                <div style="margin: 20px 0px;">
+                                    <button type="button" class="button-delete">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.43451 3.43402C3.74693 3.1216 4.25347 3.1216 4.56589 3.43402L8.00023 6.86834L11.4345 3.43409C11.7469 3.12167 12.2535 3.12167 12.5659 3.43409C12.8783 3.74651 12.8783 4.25304 12.5659 4.56546L9.13161 7.99971L12.5659 11.434C12.8783 11.7464 12.8783 12.2529 12.5659 12.5653C12.2535 12.8777 11.7469 12.8777 11.4345 12.5653L8.00023 9.13108L4.56589 12.5654C4.25347 12.8778 3.74693 12.8778 3.43451 12.5654C3.12209 12.253 3.12209 11.7464 3.43451 11.434L6.86885 7.99971L3.43451 4.56539C3.12209 4.25297 3.12209 3.74644 3.43451 3.43402Z"fill="#FF6251"></path>
+                                        </svg>Delete account
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="modal settings-page-modal-delete-container">
+                                <div class="settings-page-modal-delete modal-dialog">
+                                    <button class="modal-close">
+                                        <svg class="icon-close">
+                                            <use xlink:href="/profile/images/spritemap.svg#icon-close"></use>
+                                        </svg>
+                                    </button>
+                                    <div class="settings-page-modal-delete-title">
+                                        Deleting your account and personal data
+                                    </div>
+                                    <div>
+                                        By deleting your account and personal data, you will permanently lose access to your account on the Quotex platform. We remind you that your data will be permanently deleted and it will be impossible to restore your account in the future!
+                                    </div>
+                                    <div class="settings-page-modal-delete-note">
+                                        NOTE: Please complete all open trades and pending orders before deleting your account.
+                                    </div>
+                                    <button type="button" class="btn button-light button-small settings-page-modal-delete-button">
+                                        <span>Request for deletion</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-sections-row">
+                    <div class="content-section grow-full">
+                        <div class="content-section-head" dir="auto">
+                            Verification of credit or debit cards:
+                            <button class="btn settings-btn button-primary profile-page-cards-new">
+                                Add new card
+                            </button>
+                        </div>
+                        <div class="profile-page-cards empty">
+                            <p class="profile-page-cards-placeholder">
+                                You do not have any credit or debit cards to verify
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

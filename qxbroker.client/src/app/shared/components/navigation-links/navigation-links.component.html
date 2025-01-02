@@ -1,0 +1,8 @@
+<div class="nav-links-container tabs" [ngClass]="dropdownOpened ? 'active' : ''">
+    <div class="current-nav-link" (click)="toggleDropdown()">{{ title }}</div>
+    <ul class="nav-links">
+        <li *ngFor="let route of routes">
+            <a class="link" [ngClass]="{ 'active': isActive(route.path) }" [routerLink]="route.path">{{ route.title }}</a>
+        </li>
+    </ul>
+</div>

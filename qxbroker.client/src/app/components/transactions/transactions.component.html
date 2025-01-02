@@ -1,0 +1,78 @@
+<div class="container">
+	<div class="transactions-content">
+		<div class="transactions-container">
+			<div class="transactions-header">
+				<app-navigation-links></app-navigation-links>
+			</div>
+			<div class="transactions-filters">
+				<div class="paginator">
+                    <div class="paginator-prev button">
+						<div class="button-icon">
+							<span class="icon-caret-left"></span>
+						</div>
+                        Prev
+                    </div>
+                    <div class="paginator-pagination">
+                        1/1
+                    </div>
+                    <div class="paginator-next button">
+                        Next
+						<div class="button-icon">
+							<span class="icon-caret-right"></span>
+						</div>
+                    </div>
+                </div>
+			</div>
+
+			<div class="transactions-list-header">
+				<span>Order</span>
+				<span>Date and time</span>
+				<span>Status</span>
+				<span>Transaction type</span>
+				<span>Payment system</span>
+				<span>Amount</span>
+			</div>
+
+			<div class="transactions-body">
+				<div class="transactions-item" *ngFor="let transaction of (user$ | async)?.transactions" (click)="goToTransaction(transaction)" [ngClass]="{ 'clickable': transaction.status === TransactionStatus.Waiting }">
+					<div class="transactions-item-block transactions-item-id">
+						{{ transaction.id }}
+					</div>
+					<div class="transactions-item-datetime">
+						{{ transaction.dateAndTime | date:'short' }}
+					</div>
+					<div class="transactions-item-status" [ngClass]="{ 'green': transaction.status === TransactionStatus.Success, 'red': transaction.status === TransactionStatus.Failed }">
+						<!--icon-->
+						{{ transaction.status }}
+					</div>
+					<div class="transactions-item-type">
+						{{ transaction.type }}
+					</div>
+					<div class="transactions-item-payment">
+						{{ transaction.paymentSystem }}
+					</div>
+					<div class="transactions-item-block transactions-item-amount" [ngClass]="{ 'green': transaction.type === TransactionType.Deposit, 'red': transaction.type === TransactionType.Withdraw }">
+						<span *ngIf="transaction.type === TransactionType.Deposit">+</span>
+						<span *ngIf="transaction.type === TransactionType.Withdraw">-</span>
+						{{ transaction.amount | currency }}
+					</div>
+				</div>
+			</div>
+			<div class="paginator-mobile">
+                <div class="paginator-prev button">
+                    <div class="button-icon">
+						<span class="icon-caret-left"></span>
+					</div>
+                    Prev
+                </div>
+                <div class="paginator-pagination">1/1</div>
+                <div class="paginator-next button">
+                    Next
+					<div class="button-icon">
+						<span class="icon-caret-right"></span>
+					</div>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>

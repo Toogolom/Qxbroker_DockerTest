@@ -1,0 +1,86 @@
+<div class="deal">
+    <div class="header">
+        <div class="flags"></div>
+        <div class="name">{{ tradePair.name }}</div>
+        <div class="percent">{{ tradePair.profitFromOneMin }}%</div>
+    </div>
+</div>
+<form class="form" [formGroup]="dealForm">
+    <div class="deal-time">
+        <label class="input-control">
+            <span class="input-control-label">Time</span>
+            <span   class="input-control-label-switch"
+                (click)="changeTimeType(inputTimeType === InputTimeType.HoursMinutes ? InputTimeType.HoursMinutesSeconds : InputTimeType.HoursMinutes)">
+                Switch time
+            </span>
+            <div class="input-control-button" (click)="decrementTime()">-</div>
+            <input  class="input-control-input time"
+                    type="text"
+                    [mask]="inputTimeType === InputTimeType.HoursMinutes ? '00:00' : '00:00:00'"
+                    formControlName="timer"
+                    (click)="openTimeDropdown()"/>
+            <div class="input-control-button" (click)="incrementTime()">+</div>
+            <div class="input-control-dropdown" *ngIf="showTimeDropdown" appClickOutside (clickOutside)="closeTimeDropdown()">
+                <div    class="option"
+                        *ngFor="let time of inputTimeType === InputTimeType.HoursMinutes ? hoursMinutes : hoursMinutesSeconds"
+                        (click)="setTime(time, $event)">
+                    {{ inputTimeType === InputTimeType.HoursMinutes ? time : formatTime(time) }}
+                </div>
+            </div>
+        </label>
+
+        <div class="mobile-time-input">
+            <label class="input-control">
+                <span class="input-control-label">Time</span>
+                <input  class="input-control-input time"
+                    type="text"
+                    [mask]="inputTimeType === InputTimeType.HoursMinutes ? '00:00' : '00:00:00'"
+                    formControlName="timer"/>
+            </label>
+        </div>
+    </div>
+    <div class="deal-investment">
+        <label class="input-control">
+            <span class="input-control-label">Investment</span>
+            <span   class="input-control-label-switch"
+                    (click)="changeAmountType(inputAmountType === InputAmountType.Currency ? InputAmountType.Percent : InputAmountType.Currency)">
+                Switch
+            </span>
+            <div class="input-control-button" (click)="decrementInvestment()">-</div>
+            <input  class="input-control-input"
+                    type="text"
+                    [mask]="inputAmountType === InputAmountType.Currency ? 'separator.2' : 'separator.0'"
+                    [suffix]="inputAmountType === InputAmountType.Currency ? ' $' : ' %'"
+                    formControlName="amount"/>
+            <div class="input-control-button" (click)="incrementInvestment()">+</div>
+        </label>
+    </div>
+</form>
+<div class="put">
+    <div class="success">
+        <button class="button success" (click)="onCreateBet(BetType.Up)">
+            <span>Up</span>
+            <span class="icon-arrow-up-circle"></span>
+        </button>
+    </div>
+    <div class="payout" [ngClass]="inputAmountType === InputAmountType.Percent ? 'percent' : ''">
+        <span>Your payout:</span>
+        <b>{{ calculatePayout | currency }}</b>
+    </div>
+    <div class="investment" *ngIf="inputAmountType === InputAmountType.Percent">
+        <span>Investment:</span>
+        <div class="border"></div>
+        <b>{{ calculateInvestment | currency }}</b>
+    </div>
+    <div class="payout-mobile">
+        <span>Payout:</span>
+        <div class="border"></div>
+        <b>{{ calculatePayout | currency }}</b>
+    </div>
+    <div class="danger">
+        <button class="button danger" (click)="onCreateBet(BetType.Down)">
+            <span>Down</span>
+            <span class="icon-arrow-down-circle"></span>
+        </button>
+    </div>
+</div>

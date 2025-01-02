@@ -1,0 +1,31 @@
+<div class="modal center" [class.active]="dialogService.dialogVisible$ | async">
+	<div class="container modal-confirm-transaction">
+		<div class="dialog">
+			<div class="p-10">
+				<div class="header">
+					<span class="title">Transaction</span>
+				</div>
+			</div>
+			<div class="body">
+				<div class="alert alert-danger" *ngIf="dialogService.data?.type === 'error'">
+					<div class="alert-icon">
+						<span class="icon-alert"></span>
+					</div>
+					<div class="alert-message">
+						{{ dialogService.data?.message }}
+					</div>
+				</div>
+				<div class="form-warning" *ngIf="dialogService.data?.type === 'success'">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="10" cy="10" r="10" fill="#FF8A00"></circle>
+						<path d="M10 15.8327C9.31092 15.8327 8.75 15.3092 8.75 14.666C8.75 14.0229 9.31092 13.4994 10 13.4994C10.6891 13.4994 11.25 14.0229 11.25 14.666C11.25 15.3092 10.6891 15.8327 10 15.8327ZM11.25 11.166C11.25 11.8092 10.6891 12.3327 10 12.3327C9.31092 12.3327 8.75 11.8092 8.75 11.166V5.33268C8.75 4.68954 9.31092 4.16602 10 4.16602C10.6891 4.16602 11.25 4.68954 11.25 5.33268V11.166Z" fill="white"></path>
+					</svg>
+					<div>
+						{{ dialogService.data?.message }}
+					</div>
+				</div>
+				<button class="button button-primary button-ok" (click)="goToTransactions()">OK</button>
+			</div>
+		</div>
+	</div>
+</div>

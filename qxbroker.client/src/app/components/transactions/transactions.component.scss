@@ -1,0 +1,175 @@
+.container {
+    margin: 10px;
+}
+
+.transactions-content {
+    background-color: #212634;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(53, 58, 77, .03);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    flex-shrink: 0;
+    max-width: 100%;
+}
+
+.transactions-container {
+    min-height: calc(100vh - 73px);
+    padding: 10px;
+}
+
+.transactions-header {
+    align-items: center;
+    display: flex;
+    width: 100%;
+}
+
+.transactions-filters {
+    align-items: center;
+    display: flex;
+    margin: 15px 0;
+    padding: 0 10px;
+
+    justify-content: flex-end;
+}
+
+.transactions-list-header {
+    display: grid;
+    grid-template-columns: calc(18% - 50px) 15% 18% 15% 24% 10%;
+    grid-column-gap: 10px;
+    color: hsla(0, 0%, 100%, 0.5);
+    font-size: 12px;
+    line-height: 16px;
+    padding: 0 10px 20px 10px;
+
+    @media (max-width: 1023px) {
+        grid-template-columns: repeat(3, 1fr);
+
+        & span:nth-child(2), & span:nth-child(4), & span:nth-child(5) {
+            display: none;
+        }
+    }
+
+    @media (max-width: 567px) {
+        grid-template-columns: repeat(2, 1fr);
+
+        & span:nth-child(3) {
+            display: none;
+        }
+    }
+
+    & span:last-child {
+        margin-left: auto;
+    }
+}
+
+.transactions-body {
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+.transactions-item {
+    display: grid;
+    grid-template-areas: "transaction datetime status type payment amount";
+    grid-template-columns: calc(18% - 50px) 15% 18% 15% 24% 10%;
+    grid-column-gap: 10px;
+    border-top: 1px solid hsla(0, 0%, 100%, 0.05);
+    // margin-top: 20px;
+    padding: 20px 10px;
+
+    @media (max-width: 1023px) {
+        grid-template-columns: repeat(3, 1fr);
+        grid-row-gap: 5px;
+        grid-template-areas:
+        "transaction status amount"
+        "datetime type payment";
+    }
+
+    @media (max-width: 567px) {
+        grid-template-columns: 70% 30%;
+        grid-row-gap: 5px;
+        grid-template-areas:
+        "transaction amount"
+        "datetime payment"
+        "status type";
+    }
+
+    @media (max-width: 424px) {
+        grid-template-columns: 69% 30%;
+    }
+
+    &:first-child {
+        // margin: 10px 0 20px;
+
+        @media (max-width: 1023px) {
+            margin: 10px 0 0;
+        }
+    }
+
+    &-block {
+        align-items: center;
+        display: flex;
+    }
+
+    &-id {
+        grid-area: transaction;
+    }
+
+    &-datetime {
+        grid-area: datetime;
+    }
+
+    &-status {
+        grid-area: status;
+        position: relative;
+
+        @media (max-width: 567px) {
+            width: auto;
+        }
+
+        &.green {
+            color: #0faf59;
+        }
+
+        &.red {
+            color: #ff6251;
+        }
+    }
+
+    &-type {
+        grid-area: type;
+
+        @media (max-width: 567px) {
+            text-align: end;
+        }
+    }
+
+    &-payment {
+        grid-area: payment;
+
+        @media (max-width: 1023px) {
+            text-align: end;
+        }
+    }
+
+    &-amount {
+        grid-area: amount;
+        justify-content: flex-end;
+
+        &.green {
+            color: #0faf59;
+        }
+
+        &.red {
+            color: #ff6251;
+        }
+    }
+
+    &.clickable {
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    }
+}

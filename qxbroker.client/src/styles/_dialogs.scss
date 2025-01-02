@@ -1,0 +1,76 @@
+@import "_variables.scss";
+
+.modal {
+	background-color: $color-modal-bg-fon;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: opacity .21s ease-out;
+    z-index: 150;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: all;
+    transition: opacity .42s ease-out;
+}
+
+.modal.center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.modal.center .container {
+    top: 0;
+}
+
+.modal.active .container {
+    top: 5%;
+}
+
+.container {
+	margin: 0 auto 30px;
+    position: relative;
+    top: 0;
+}
+
+.dialog {
+	background-color: $color-grey-btn;
+    border-radius: 8px;
+    box-shadow: 20px 0 80px $color-modal-bg;
+    color: $color-white;
+    max-width: 100%;
+    padding: 30px;
+    transition: top .21s ease-out;
+
+    @media only screen and (max-width: 567px) {
+        padding: 10px;
+    }
+
+	.close {
+		background: none;
+		border: none;
+		color: $color-white;
+		cursor: pointer;
+		height: 18px;
+		width: 18px;
+		opacity: .3;
+		padding: 3px;
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		transition: opacity .2s;
+
+		.icon-close::before {
+			font-size: 12px;
+			float: left;
+		}
+	}
+}

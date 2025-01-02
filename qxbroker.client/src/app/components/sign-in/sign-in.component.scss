@@ -1,0 +1,44 @@
+@import "../../../styles/variables";
+@import "../../../styles/forms";
+@import "../../../styles/buttons";
+
+.input-value.password {
+	position: relative;
+}
+
+.btn-password {
+	position: absolute;
+	top: 40%;
+	right: 20px;
+	cursor: pointer;
+}
+
+.hint {
+	margin: 0 0 30px;
+	padding: 18px 25px;
+	position: relative;
+	border-radius: 4px;
+	font-size: 12px;
+	line-height: 16px;
+	text-align: left;
+
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: 9px;
+		width: 2px;
+		left: 0;
+		top: 9px;
+		background-color: $color-error;
+		border-radius: 1px;
+	}
+
+	&.danger {
+		color: $color-error;
+		background-color: rgba(219, 70, 53, .05);
+
+		&:last-of-type {
+			margin-bottom: 18px;
+		}
+	}
+}

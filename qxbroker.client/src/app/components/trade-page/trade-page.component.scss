@@ -1,0 +1,13 @@
+:host {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+    margin: 10px;
+    max-height: calc(100vh - 73px);
+    min-height: calc(100vh - 73px);
+    
+    @media (max-width: 1023px) {
+        display: block;
+        max-height: none !important;
+    }
+}

@@ -1,0 +1,14 @@
+.confirmation-message {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .message-text {
+        color: #fff;
+        text-align: center;
+        font-size: 52px;
+        font-weight: 700;
+        line-height: normal;
+    }
+}

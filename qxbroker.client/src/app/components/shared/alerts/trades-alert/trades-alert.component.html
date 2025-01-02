@@ -1,0 +1,22 @@
+<div class="trades-notifications">
+    <div    class="trades-notifications-item"
+            [style.animationName]="alert.isClosing ? 'notificationHide' : 'notificationShow'"
+            [style.animationDuration]="alert.isClosing ? '400ms' : '800ms'"
+            *ngFor="let alert of model">
+        <div class="trades-notifications-header">
+            <div class="trades-notifications-flags">
+                <div class="flags">
+                    <span class="icon-flag-btc"></span>
+                    <span class="icon-flag-btc"></span>
+                </div>
+            </div>
+            <div class="trades-notifications-name">{{ alert.flags?.from }}/{{ alert.flags?.to }}</div>
+            <div class="trades-notifications-time">{{convertDurationToHHMMSS(alert?.time)}}</div>
+        </div>
+        <div class="trades-notifications-total" [ngClass]="alert.amount === 0 ? 'red' : 'green'">{{ alert?.amount }} $</div>
+        <div class="trades-notifications-close">
+            <app-close-btn-with-timer [timeLimitInMS]="autoHideTimeout" [event]="event.asObservable()"
+                (timeElapsed)="close(alert)"></app-close-btn-with-timer>
+        </div>
+    </div>
+</div>

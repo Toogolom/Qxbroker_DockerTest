@@ -1,0 +1,17 @@
+.icon::before {
+    content: "";
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;cursor: pointer;
+}
+
+.icon-arrow-right-circle,
+.icon-arrow-down-circle,
+.icon-arrow-up-circle {
+    background-color: rgba(184, 186, 189, 0.4);
+    border-radius: 50%;
+    font-size: 20px;
+}

@@ -1,0 +1,214 @@
+<div class="container">
+    <div class="trades-content">
+        <div class="trades-container">
+            <div class="trades-header">
+                <app-navigation-links></app-navigation-links>
+            </div>
+            <div class="trades-tabs">
+                <div class="trades-tab active">Trade history</div>
+            </div>
+            <form class="trades-filters" [formGroup]="filterForm">
+                <div class="datepicker-container">
+                    <label for="dateFrom" class="label">Start date</label>
+                    <input
+                        class="datepicker"
+                        name="dateFrom"
+                        appDateInputFilter
+                        formControlName="dateFrom"
+                        [matDatepicker]="datePickerFrom"
+                        (click)="datePickerFrom.open()"
+                    />
+                    <mat-datepicker #datePickerFrom></mat-datepicker>
+                </div>
+                <div class="datepicker-container">
+                    <label for="dateTo" class="label">End date</label>
+                    <input
+                        class="datepicker"
+                        name="dateTo"
+                        appDateInputFilter
+                        formControlName="dateTo"
+                        [matDatepicker]="datePickerTo"
+                        (click)="datePickerTo.open()"
+                    />
+                    <mat-datepicker #datePickerTo></mat-datepicker>
+                </div>
+                <div class="trades-filters-select">
+                    <div
+                        class="input-control input-control-select"
+                        (click)="toggleAccountTypeDropdown()"
+                        appClickOutside
+                        (clickOutside)="closeAccountTypeDropdown()"
+                        [ngClass]="accountTypeDropdownOpened ? 'active' : ''"
+                    >
+                        <div class="input-control-label">Account Type</div>
+                        <div class="input-control-value">
+                            {{
+                                filterForm.value.accountType === "Live"
+                                    ? "Live Account"
+                                    : "Demo Account"
+                            }}
+                        </div>
+                        <div class="input-control-caret">
+                            <span class="icon-caret"></span>
+                        </div>
+                        <ng-container *ngIf="accountTypeDropdownOpened">
+                            <div class="input-control-dropdown">
+                                <div
+                                    class="input-control-dropdown-option"
+                                    [ngClass]="{
+                                        active:
+                                            filterForm.value.accountType ===
+                                            'Live'
+                                    }"
+                                    (click)="selectAccountType('Live')"
+                                >
+                                    Live Account
+                                </div>
+                                <div
+                                    class="input-control-dropdown-option"
+                                    [ngClass]="{
+                                        active:
+                                            filterForm.value.accountType ===
+                                            'Demo'
+                                    }"
+                                    (click)="selectAccountType('Demo')"
+                                >
+                                    Demo Account
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="trades-filters-save" (click)="applyFilters()">
+                    <span>Apply filters</span>
+                    <div class="trades-filters-save-icon">
+                        <span class="icon-check-tiny"></span>
+                    </div>
+                </div>
+                <div class="trades-export-container">
+                    <div
+                        class="trades-export"
+                        (click)="toggleExportDropdown()"
+                        appClickOutside
+                        (clickOutside)="closeExportDropdown()"
+                        [ngClass]="exportDropdownOpened ? 'active' : ''"
+                    >
+                        <span class="icon-export-trades"></span>
+                        <span>Export to</span>
+                        <span class="icon-caret"></span>
+                    </div>
+                    <ng-container *ngIf="exportDropdownOpened">
+                        <div class="trades-export-dropdown">
+                            <div class="trades-export-dropdown-item">XLS</div>
+                            <div class="trades-export-dropdown-item">CSV</div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="paginator">
+                    <div
+                        class="paginator-prev button"
+                        [class.disabled]="currentPage === 1"
+                        (click)="prevPage()"
+                    >
+                        <div class="button-icon">
+                            <span class="icon-caret-left"></span>
+                        </div>
+                        Prev
+                    </div>
+                    <div class="paginator-pagination">
+                        {{ currentPage }} / {{ totalPages }}
+                    </div>
+                    <div
+                        class="paginator-next button"
+                        [class.disabled]="currentPage === totalPages"
+                        (click)="nextPage()"
+                    >
+                        Next
+                        <div class="button-icon">
+                            <span class="icon-caret-right"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="trades-list-header">
+                <span>Asset</span>
+                <span>Info</span>
+                <span>Opening quote</span>
+                <span>Closing quote</span>
+                <span>Amount</span>
+                <span>Income</span>
+            </div>
+            <div class="trades-list-header-mobile">
+                <span>Asset / Amount</span>
+                <span>Opening / Closing quote</span>
+                <span>Amount / Income</span>
+            </div>
+
+            <div class="trades-body">
+                <div class="trades-item" *ngFor="let item of tradeItems">
+                    <div class="trades-item-block trades-item-asset">
+                        <b>{{ item.pair }}</b>
+                    </div>
+                    <div class="trades-item-info">
+                        <div class="trades-item-info-percent">
+                            {{ item.percent }}%
+                        </div>
+                        <div class="trades-item-subtext">
+                            {{ item.id }}
+                        </div>
+                    </div>
+                    <div class="trades-item-open">
+                        <div class="trades-item-open-name">
+                            <span>{{ item.openPrice }}</span>
+                        </div>
+                        <div class="trades-item-subtext">
+                            {{ item.openTime | date : "yyyy-MM-dd HH:mm:ss" }}
+                        </div>
+                    </div>
+                    <div class="trades-item-close">
+                        <span>{{ item.closePrice }}</span>
+                        <div class="trades-item-subtext">
+                            {{ item.closeTime | date : "yyyy-MM-dd HH:mm:ss" }}
+                        </div>
+                    </div>
+                    <div
+                        class="trades-item-block trades-item-amount"
+                        [ngClass]="item.betType === 'Up' ? 'green' : 'red'"
+                    >
+                        <span
+                            *ngIf="item.betType === 'Up'"
+                            class="icon-arrow icon-arrow-up-circle"
+                        ></span>
+                        <span
+                            *ngIf="item.betType === 'Down'"
+                            class="icon-arrow icon-arrow-down-circle"
+                        ></span>
+                        <b>{{ item.amount | currency }}</b>
+                    </div>
+                    <div
+                        class="trades-item-block trades-item-income"
+                        [ngClass]="item.income === 0 ? 'red' : 'green'"
+                    >
+                        <b>{{ item.income | currency }}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="paginator-mobile">
+                <div class="paginator-prev button">
+                    <div class="button-icon">
+                        <span class="icon-caret-left"></span>
+                    </div>
+                    Prev
+                </div>
+                <div class="paginator-pagination">1/1</div>
+                <div class="paginator-next button">
+                    Next
+                    <div class="button-icon">
+                        <span class="icon-caret-right"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

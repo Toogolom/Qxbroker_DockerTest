@@ -1,0 +1,105 @@
+@import "../styles/variables";
+
+.questions-section {
+    max-width: 920px;
+    width: 100%;
+    margin-top: 48px;
+
+    .section-checkbox {
+        display: none;
+
+        &:checked + .question-block {
+            margin-bottom: 18px;
+            background: rgba(53, 58, 77, 0.5);
+            border-radius: 9px;
+
+            .question-label {
+                color: $color-white;
+            }
+
+            .hidden-text {
+                opacity: 1;
+                max-height: 100%;
+                margin-top: 12px;
+            }
+        }
+
+        &:checked + .question-block .icon-plus {
+            display: none;
+        }
+
+        &:checked + .question-block .icon-minus {
+            display: block;
+        }
+    }
+
+    .question-block {
+        border-radius: 10px;
+        background: #272A37;
+        padding: 24px;
+        margin-bottom: 12px;
+
+        @media (max-width: 680px) {
+            padding: 12px;
+        }
+
+        &:hover {
+            background: $color-grey-btn;
+        }
+
+        .question-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: $color-white;
+            font-size: 21px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 34px;
+            user-select: none;
+            cursor: pointer;
+            gap: 24px;
+
+            @media (max-width: 680px) {
+                font-size: 16px;
+                line-height: 24px;
+            }
+            .label-icon {
+                content: '';
+                display: block;
+                flex: none;
+                width: 16px;
+                height: 16px;
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+            .icon-plus {
+                background-image: url("../assets/images/faq-plus-icon.svg");
+            }
+            .icon-minus {
+                display: none;
+                background-image: url("../assets/images/faq-minus-icon.svg");
+            }
+        }
+
+        .hidden-text {
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease, max-height 0.3s ease;
+            font-size: 18px;
+            line-height: 28px;
+            color: $color-grey;
+            margin: 0;
+            opacity: 0;
+
+            @media (max-width: 680px) {
+                font-size: 14px;
+                line-height: 24px;
+            }
+
+            @media (max-width: 520px) {
+                padding-right: 0;
+            }
+        }  
+    }
+}

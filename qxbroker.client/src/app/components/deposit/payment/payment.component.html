@@ -1,0 +1,175 @@
+<div class="container">
+    <div class="content">
+        <div class="header">
+            <app-navigation-links></app-navigation-links>
+           	<app-balance-values></app-balance-values>
+        </div>
+		<div class="page-sections">
+			<div class="page-sections-row bonus">
+				<div class="page-sections-column grow-3of5">
+					<div class="page-sections-row">
+						<div class="content-section grow-1of3">
+							<div class="content-section-head">
+								Chosen payment method:
+							</div>
+							<div class="payment-provider active block">
+								<div class="payment-provider-block">
+									<div class="title">
+										<div class="payment-provider-logo">
+											<img	*ngFor="let icon of paymentInfo?.icons"
+													[src]="icon">
+										</div>
+										<span>{{ paymentInfo?.name }}</span>
+									</div>
+								</div>
+								<div>
+									<div class="payment-provider-amount">
+										Min amount:
+										<b>{{ 10 | currency }}</b>
+									</div>
+									<!-- <div class="payment-provider-amount">
+										Max amount
+										<b>{{ 50000 | currency }}</b>
+									</div> -->
+								</div>
+							</div>
+							<a class="content-section-head-action link back" (click)="navigateToDeposit()" [style.z-index]="10">
+								<img class="icon icon-primary" src="assets/images/icomoon-fails/caret-right.svg">
+								<span>Choose a different method</span>
+							</a>	
+						</div>
+						<div class="content-section grow-2of3">
+							<form>
+								<div class="content-section-head">Payment data</div>
+								<div class="form-control">
+									<label class="input-control-cabinet input-control-cabinet-text" for="amount">
+										<span class="input-control-cabinet-label">The amount</span>
+										<input	class="input-control-cabinet-input" 
+												type="number" 
+												name="amount" 
+												[(ngModel)]="amount"
+										/>
+										<div class="input-control-cabinet-addon">USD</div>
+									</label>
+								</div>
+								<div class="form-tiny">
+									<a class="button button-tiny" (click)="setAmount(150)" href="javascript:void(0)">{{ 150 | currency }}</a>
+									<a class="button button-tiny" (click)="setAmount(200)" href="javascript:void(0)">{{ 200 | currency }}</a>
+									<a class="button button-tiny" (click)="setAmount(300)" href="javascript:void(0)">{{ 300 | currency }}</a>
+									<a class="button button-tiny" (click)="setAmount(500)" href="javascript:void(0)">{{ 500 | currency }}</a>
+									<a class="button button-tiny" (click)="setAmount(1000)" href="javascript:void(0)">{{ 1000 | currency }}</a>
+								</div>
+								<div class="alert alert-danger" [ngClass]="{'visible': showMinDepositErrorAlert, 'hidden': !showMinDepositErrorAlert}">
+									<div class="alert-icon">
+										<span class="icon-alert"></span>
+									</div>
+									<div class="alert-message">
+										<p> {{ 'You need to deposit at least ' + selectedBonus?.minAmount + ' $ ' + 'to receive bonus.' }}</p>
+									</div>
+								</div>
+								<!-- <div class="form-block">
+									<div class="form-control">
+										<label class="input-control-cabinet input-control-cabinet-text" for="first-name">
+											<span class="input-control-cabinet-label">First name:</span>
+											<input class="input-control-cabinet-input" type="text" name="first-name">
+										</label>
+									</div>
+									<div class="form-control">
+										<label class="input-control-cabinet input-control-cabinet-text" for="last-name">
+											<span class="input-control-cabinet-label">Last name:</span>
+											<input class="input-control-cabinet-input" type="text" name="last-name">
+										</label>
+									</div>
+									<div class="form-control">
+										<label class="input-control-cabinet input-control-cabinet-text" for="birth-date">
+											<span class="input-control-cabinet-label">Date of birth:</span>
+											<input class="input-control-cabinet-input" type="text" name="birth-date">
+										</label>
+									</div>
+								</div> -->
+								<div class="form-block">
+									<div class="form-warning">
+										<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<circle cx="10" cy="10" r="10" fill="#FF8A00"></circle>
+											<path d="M10 15.8327C9.31092 15.8327 8.75 15.3092 8.75 14.666C8.75 14.0229 9.31092 13.4994 10 13.4994C10.6891 13.4994 11.25 14.0229 11.25 14.666C11.25 15.3092 10.6891 15.8327 10 15.8327ZM11.25 11.166C11.25 11.8092 10.6891 12.3327 10 12.3327C9.31092 12.3327 8.75 11.8092 8.75 11.166V5.33268C8.75 4.68954 9.31092 4.16602 10 4.16602C10.6891 4.16602 11.25 4.68954 11.25 5.33268V11.166Z" fill="white"></path>
+										</svg>
+										<span>
+											Attention! A new wallet address is generated for each transaction. Do not send funds to the same address again, otherwise you will lose them.
+										</span>
+									</div>
+								</div>
+								<div class="form-row deposit-page-submit">
+									<button class="grow-1of3 deposit-button" (click)="navigateToConfirm()">
+										<span>Deposit</span>
+										<span class="icon-arrow-right-circle"></span>
+									</button>
+									<div class="form-summary" *ngIf="selectedBonus">
+										You'll get a
+										<b>{{ selectedBonus.percent }}%</b>
+										bonus:
+										<span>{{ calculateBonus(selectedBonus) | currency }}</span>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="page-sections-column grow-2of5 faq-block">
+					<div class="page-sections-row">
+						<div class="content-section grow-full">
+							<ng-container *ngIf="bonuses.length > 0">
+								<div class="content-section-head">
+									<span>Choose your bonus:</span>
+								</div>
+								<div class="content-section bonus">
+									<div class="bonuses">
+										<ng-container *ngFor="let bonus of bonuses">
+											<label	class="bonus-radio" 
+													[class]="bonus.classes.join(' ')"
+													[ngClass]="{ 'active': selectedBonus?.code === bonus.code }"
+													[for]="bonus.code"
+													(click)="selectBonus(bonus)">	
+												<input	class="bonus-radio-input"
+													type="radio"
+													[name]="bonus.code"
+													[value]="bonus.code"
+													[checked]="selectedBonus?.code === bonus.code"/>
+												<div class="bonus-radio-label">{{ bonus.name }}</div>
+												<!-- <div class="bonus-radio-value"> {{ calculateBonus(bonus) | currency }}</div> -->
+												<div class="bonus-radio-value"> {{ bonus.minAmount | currency }}</div>
+
+												<div class="bonus-radio-help" *ngIf="bonus.minAmount === null; else default">Welcome bonus</div>
+												<ng-template #default>
+													<div class="bonus-radio-help">{{ 'If you deposit more than ' + bonus.minAmount + '$' }}</div>
+												</ng-template>
+											</label>
+										</ng-container>
+									</div>
+								</div>
+							</ng-container>
+	
+							<div class="content-section-head">
+								<span>FAQ:</span>
+								<a class="content-section-head-action link" [routerLink]="['/faq']" [style.z-index]="10">
+                                    <span>Check out full FAQ</span>
+                                    <img class="icon icon-primary" src="assets/images/icomoon-fails/caret-right.svg">
+                                </a>	
+							</div>
+							<div class="faq faq-columns">
+                                <div class="faq-column">
+									<div class="faq-item" *ngFor="let item of faq">
+                                        <div class="faq-question" [ngClass]="item.toggled ? 'active' : ''" (click)="item.toggled = !item.toggled">
+                                            {{ item.question }}
+                                        </div>
+                                        <div class="faq-answer" [innerHTML]="item.answer"></div>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<app-brands-footer></app-brands-footer>
+	</div>
+</div>

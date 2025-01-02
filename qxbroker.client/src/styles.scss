@@ -1,0 +1,48 @@
+@import "styles/_buttons.scss";
+@import "styles/_icons.scss";
+@import "styles/_select.scss";
+@import "styles/_inputs.scss";
+@import "styles/_dialogs.scss";
+@import "styles/_page-sections";
+@import "styles/_pagination";
+@import "styles/angular-material";
+@import "styles/_alerts.scss";
+@import "styles/_forms";
+
+a {
+    text-decoration: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    border-bottom: 1px dashed transparent;
+    letter-spacing: .01em;
+}
+
+body {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    position: relative;
+    background: linear-gradient(0deg, #1c1f2d, #1c1f2d), #f2f4f9;
+}
+
+#tv-attr-logo {
+    display: none !important ;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+html, body {
+    min-height: 100vh;
+    height: auto;
+    margin: 0;
+}
