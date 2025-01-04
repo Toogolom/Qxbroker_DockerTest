@@ -94,7 +94,7 @@
 
         private string GenerateLink(string token, string route)
         {
-            var confirmationUrl = $"http://localhost/{route}?&token={token}";
+            var confirmationUrl = $"http://83.217.214.137/{route}?&token={token}";
 
             return confirmationUrl;
         }
