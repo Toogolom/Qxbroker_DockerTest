@@ -4,6 +4,7 @@
     using Qxbroker.Domain.Token;
     using Qxbroker.Domain.User;
     using Qxbroker.Service.Email;
+    using Qxbroker.Service.Redis;
     using Qxbroker.Service.Session;
     using Qxbroker.Service.Token;
     using Qxbroker.Service.Token.BlackList;
@@ -14,14 +15,14 @@
         private readonly ITokenService _tokenService;
         private readonly ITokenBlacklistService _blacklistService;
         private readonly IEmailService _emailService;
-        private readonly ISessionService _sessionService;
+        private readonly IRedisService _redisService;
 
-        public AuthService(IUserRepository userRepository, ITokenService tokenService, IEmailService emailService, ISessionService sessionService, ITokenBlacklistService blacklistService)
+        public AuthService(IUserRepository userRepository, ITokenService tokenService, IEmailService emailService, IRedisService redisService, ITokenBlacklistService blacklistService)
         {
             _userRepository = userRepository;
             _tokenService = tokenService;
             _emailService = emailService;
-            _sessionService = sessionService;
+            _redisService = redisService;
             _blacklistService = blacklistService;
         }
 
@@ -40,7 +41,7 @@
         public async Task<Token> ConfirmEmail(string token)
         {
             var email = _tokenService.GetEmailByToken(token);
-            var user = _sessionService.Get<User>($"PasswordFor{email}");
+            var user = await _redisService.GetData<User>($"PasswordFor{email}");
 
             await _userRepository.AddUser(user);
             Token token1 = new Token()
@@ -81,7 +82,7 @@
 
             user.Password = HashPassword(user.Password);
 
-            _sessionService.Set<User>($"PasswordFor{user.Email}", user);
+            await _redisService.SetData($"PasswordFor{user.Email}", user);
 
             var token = _tokenService.GetToken(user);
             await _emailService.SendConfirmationEmail(user.Email, token.AccessToken);
