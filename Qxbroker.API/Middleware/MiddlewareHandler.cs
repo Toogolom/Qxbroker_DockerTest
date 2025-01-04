@@ -73,7 +73,7 @@
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     return context.Response.WriteAsync(JsonConvert.SerializeObject(new
                     {
-                        error = "An unexpected error occurred. Please try again later.",
+                        error = exception.Message,
                     }));
             }
         }
