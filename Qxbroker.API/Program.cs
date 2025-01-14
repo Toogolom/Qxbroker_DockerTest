@@ -191,7 +191,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("CorsPolicy", policy =>
     {
         options.AddPolicy("CorsPolicy", builder => builder
-                    .WithOrigins("http://localhost", "http://localhost:80", "http://83.217.214.137")
+                    .WithOrigins("http://localhost", "http://localhost:80", "http://83.217.214.137", "https://qvotex.com")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());
@@ -218,7 +218,7 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
